@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_es_service_charge_form" model="ir.ui.view">
+            <field name="name">es.service.charge.form</field>
+            <field name="model">es.service.charge</field>
+            <field name="arch" type="xml">
+                <form string="EasyShip Service" create="false" edit="false">
+                    <header>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box">
+                        </div>
+                        <div class="oe_title">
+                            <label for="courier_name" string="Service Name"/>
+                            <h1>
+                                <field name="courier_name" placeholder="Service Name" />
+                            </h1>
+                            <div name="options">
+                            </div>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="es_service_id"/>
+                                <field name="delivery_time"/>
+                                <field name="order_id"/>
+                                <field name="courier_does_pickup"/>
+                                <field name="currency_id" invisible="1" />
+                            </group>
+                            <group>
+                                <field name="shipment_charge" widget="monetary"/>
+                                <field name="insurance_fee" widget="monetary"/>
+                                <field name="total_charge" widget="monetary"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_es_service_charge_tree" model="ir.ui.view">
+            <field name="name">es.service.charge.tree</field>
+            <field name="model">es.service.charge</field>
+            <field name="arch" type="xml">
+                <tree string="EasyShip Service" create="false" edit="false">
+                    <field name="es_service_id"/>
+                    <field name="courier_name"/>
+                    <field name="delivery_time"/>
+                    <field name="courier_does_pickup"/>
+                    <field name="shipment_charge" widget="monetary"/>
+                    <field name="insurance_fee" widget="monetary"/>
+                    <field name="total_charge" widget="monetary"/>
+                    <field name="currency_id" invisible="1" />
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

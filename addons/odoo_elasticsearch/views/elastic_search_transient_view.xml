@@ -1,0 +1,22 @@
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="elastic_search_transient_form">
+	      <field name="name">elastic.search.transient.form</field>
+	      <field name="model">elastic.search.transient</field>
+	      <field name="type">form</field>
+	      <field name="priority" eval="1"/>
+	      <field name="arch" type="xml">
+	      	  <form string="Update Index Record">
+                    <group class="oe_title">
+                        <field name="need_sync"/>
+                    </group>
+                    <footer>
+                        <button name="action_need_sync_apply" string="Apply" type="object" class="btn btn-sm btn-primary"/>
+                        <button string="Cancel" class="btn btn-sm btn-default" special="cancel"/>
+                    </footer>
+                </form>
+	      </field>
+	  </record>
+
+	</data>
+</odoo>

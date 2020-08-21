@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="amazon_product_view_form">
+            <field name="name">amazon.product.form</field>
+            <field name="model">amazon.product</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="img_url"/>
+                            <field name="link_url"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="amazon_product_view_tree">
+            <field name="name">amazon.product.tree</field>
+            <field name="model">amazon.product</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="amazon_product_action">
+            <field name="name">Amazon Product</field>
+            <field name="res_model">amazon.product</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="amazon_product_main_menu" name="Amazon Product"/>
+        <menuitem id="amazon_product_menu" parent="amazon_product_main_menu" name="Amazon Product"/>
+
+        <menuitem name="Amazon Product"
+                  id="amazon_product_sub_menu"
+                  parent="amazon_product_menu"
+                  action='amazon_product_action'
+                  sequence="1"
+        />
+    </data>
+</odoo>

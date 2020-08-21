@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_shipping_partner_search" model="ir.ui.view">
+            <field name="name">shipping.partner.search.view</field>
+            <field name="model">shipping.partner</field>
+            <field name="arch" type="xml">
+                <search string="Shipping Partner Search">
+                    <field name="name"/>
+                    <field name="marketplace_seller_id"/>
+                    <field name="provider_company" />
+                    <group expand="0" string="Group By">
+                        <filter string="Seller" name="seller" domain="[]" context="{'group_by':'marketplace_seller_id'}"/>
+                        <filter string="Provider" name="provider" domain="[]" context="{'group_by':'provider_company'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <menuitem id="seller_dashboard_shipping_partner_menu" name="Delivery Partner" sequence="50" parent="odoo_marketplace.wk_seller_dashboard_menu8" action="base_shipping_partner.action_shipping_partner"/>
+    </data>
+</odoo>

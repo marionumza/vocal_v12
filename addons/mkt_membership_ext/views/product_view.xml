@@ -1,0 +1,43 @@
+<odoo>
+    <record id="wk_mp_membership_products_tree_view" model="ir.ui.view">
+        <field name="name">Membership products</field>
+        <field name="inherit_id" ref="marketplace_membership.wk_mp_membership_products_tree_view"/>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+            <field name="plan_duration" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </field>
+            <field name="duration_type" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="wk_mp_membership_products_form_view" model="ir.ui.view">
+        <field name="name">Membership Products</field>
+        <field name="inherit_id" ref="marketplace_membership.wk_mp_membership_products_form_view"/>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+            <label for="membership_t_and_c" position="before">
+                <label for="commission_txt"/>
+                <field colspan="4" name="commission_txt"/>
+                <label for="professional_translation_txt"/>
+                <field colspan="4" name="professional_translation_txt"/>
+                <label for="seo_txt"/>
+                <field colspan="4" name="seo_txt"/>
+            </label>
+        </field>
+    </record>
+
+    <record id="wk_mp_membership_search_view" model="ir.ui.view">
+        <field name="name">membership.product.search.form</field>
+        <field name="inherit_id" ref="marketplace_membership.wk_mp_membership_search_view"/>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+            <filter name="inactive" position="after">
+                <filter string="Monthly Plans" name="mo_plans" domain="[('duration_type','=', 'month'), ('plan_duration','=', 1)]"/>
+                <filter string="Yearly Plans" name="yearly_plans" domain="[('duration_type','=', 'year'), ('plan_duration','=', 1)]"/>
+            </filter>
+        </field>
+    </record>
+</odoo>

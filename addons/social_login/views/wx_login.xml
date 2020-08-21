@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="social_login.corp_login" name="企业微信登录">
+        <t t-call="web.login_layout">
+            <div class="oe_login_form" role="form">
+
+                <input type="hidden" id="corpid" name="corpid" t-att-value="corpid"/>
+                <input type="hidden" id="agentid" name="agentid" t-att-value="agentid"/>
+                <input type="hidden" id="qr_id" name="qr_id" t-att-value="qr_id"/>
+                <input type="hidden" id="url_root" name="qr_id" t-att-value="url_root"/>
+
+            <!-- 微信登录 -->
+            <div id="wx_reg" style="text-align: center;"></div>
+
+            <script type="text/javascript" src="https://rescdn.qqmail.com/node/ww/wwopenmng/js/sso/wwLogin-1.0.0.js"></script>
+            <script type="text/javascript">
+            $(document).ready(function(){
+                var host = window.location.host;
+                window.WwLogin({
+                "id" : "wx_reg",
+                "appid" : $("#corpid").val(),
+                "agentid" : $("#agentid").val(),
+                "redirect_uri" : $("#url_root").val() + "wx_enterprise/callback",
+                "state" : $("#qr_id").val(),
+                "href" : "",
+                });
+            }); 
+            </script>
+
+            </div>
+        </t>
+    </template>
+
+    <template id="social_login.wx_login" name="微信登录">
+        <t t-call="web.login_layout">
+            <div class="oe_login_form" role="form">
+                <h3 style="text-align: center;">微信登录</h3>
+                <div style="text-align: center;">
+                    <div class="pw-box-hd" id="barcode_box">
+                        <img t-attf-src="data:image/png;base64,{{ qrcode_img }}" style="width: 260px;"/>
+                    </div>
+		    <p>请使用微信扫描二维码登录</p>
+                    <form id="wx_login_form" action="/wx/login" method="post" target="_self">
+                        <input type="hidden" id="qr_id" name="qr_id" t-att-value="qr_id"/>
+                        <input type="hidden" id="user_id" name="user_id" t-att-value="user_id"/>
+                    </form>
+                </div>
+            </div>
+
+    <script>
+        var interval_check = null;
+        function timeout_check(){
+            if (interval_check){
+                window.clearInterval(interval_check);
+                $('#barcode_box').html('二维码已超时，请刷新页面');
+            }
+        }
+
+        function check_paid(acquirer_id,reference){
+            var qr_id = $('#qr_id').val();
+            var acquirer_id = $('#id_acquirer_id').val();
+            $.ajax({
+                type: "POST",
+                url: "/wx/check",
+                data: {
+                    qr_id: qr_id
+                },
+                dataType: "json",
+                success: function(data) {
+                    if (data.state=='verified'){
+                        //验证成功
+                        $('#user_id').val(data.user_id);
+                        $('#wx_login_form').submit();
+                    }else if(data.state=='fail'){
+                        window.location.href = '/wx/bind?qr_id=' + qr_id;
+                   }else{
+                        if (!interval_check){
+                            interval_check=window.setInterval("check_paid()",2000);
+                            window.setTimeout("timeout_check()",120000);
+                        }
+                   }
+                },
+            });
+        }
+
+        $(function(){
+            check_paid();
+        });
+    </script>
+
+        </t>
+    </template>
+
+
+    <template id="social_login.wx_bind" name="微信绑定">
+        <t t-call="web.login_layout">
+            <div class="oe_login_form" role="form">
+                <h4 style="text-align: center;"><t t-esc="nickname + ' 没有绑定本系统的帐户'" /></h4>
+                <div style="text-align: center;">
+                    <div class="pw-box-hd" id="barcode_box">
+                        <img t-attf-src="{{ headimgurl }}" style="width: 150px;"/>
+                    </div><br/><br/>
+                    <a type="button" class="btn btn-primary" t-attf-href="/web/login?qr_id={{ qr_id }}">已有帐号？登录并绑定</a><br/><br/>
+                    <t t-if="allow_reg">
+                    <a type="button" class="btn btn-default" t-attf-href="/web/signup?qr_id={{ qr_id }}">注册新帐号</a>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="corp_bind" name="企业微信绑定">
+        <t t-call="web.login_layout">
+            <div class="oe_login_form" role="form">
+                <h4 style="text-align: center;"><t t-esc="name + ' 没有绑定本系统的帐户'" /></h4>
+                <div style="text-align: center;">
+                    <div class="pw-box-hd" id="barcode_box">
+                        <t t-if="avatar">
+                        <img t-attf-src="{{ avatar }}" style="width: 150px;"/>
+                        </t>
+                    </div><br/><br/>
+                    <a type="button" class="btn btn-primary" t-attf-href="{{login_url}}">已有帐号？登录并绑定</a><br/><br/>
+                    <!--<a type="button" class="btn btn-default" t-attf-href="/web/signup?qr_id={{ qr_id }}">注册新帐号</a>-->
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+</odoo>

@@ -1,0 +1,37 @@
+<odoo>
+  <data>
+        <record id="trend_map_wizard_form" model="ir.ui.view">
+            <field name="name">trend_map_wizard Form</field>
+            <field name="model">trend.map.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Synchronize your Trending Search" version="7.0" create="false" edit="false">
+										<separator string="Fill the detail to filter data from Elastic Server"/>
+										<!-- <p class="oe_grey oe_inline">
+						          on clicking buttons,
+						          you can initiate corresponding operations like creation of Mobikul Categories or linking Mobikul Category on product.
+						        </p> -->
+                      <group>
+                        <field name='limit'/>
+                        <field name='start_date'/>
+                        <field name='end_date'/>
+                      </group>
+											<footer>
+                        <button type="object" name="import_trend_search" class="oe_highlight" string="Apply"/>
+												<button special="cancel" class="oe_highlight" string="Close"/>
+											</footer>
+						    </form>
+            </field>
+        </record>
+
+        <record id="trend_map_wizard_action" model="ir.actions.act_window">
+                <field name="name">Synchronize your Trending Search</field>
+                <field name="res_model">trend.map.wizard</field>
+                <field name="view_type">form</field>
+                <field name="view_mode">form</field>
+                <field name="target">new</field>
+            </record>
+
+
+      </data>
+</odoo>

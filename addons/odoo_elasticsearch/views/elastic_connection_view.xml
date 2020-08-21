@@ -1,0 +1,70 @@
+<odoo>
+    <data>
+
+
+        <record model="ir.ui.view" id="elastic_connection_form_view">
+	      <field name="name">Elastic Connection Form</field>
+	      <field name="model">elastic.connection</field>
+	      <field name="type">form</field>
+	      <field name="priority" eval="1"/>
+	      <field name="arch" type="xml">
+	      	<form create="false" >
+                <header>
+                    <button type="object" name="test_connection" string="Test Connection" icon="fa-television"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </group>
+
+                    <group >
+                      <field name="host"/>
+
+                      <field name="is_port" />
+                      <field name="port" attrs="{'invisible':[('is_port', '=', False)],'required':[('is_port', '=', True)]}"/>
+                      <field name="timeout"/>
+                      <field name="url_prefix"/>
+                    </group>
+                    <group>
+                      <field name="auth_type" attrs="{'invisible':[('url_prefix', '!=', 'https')],'required':[('url_prefix', '=', 'https')]}"/>
+                      <field name="user_name" attrs="{'invisible':['|',('auth_type', '!=', 'http_auth'),('url_prefix', '!=', 'https')],'required':[('url_prefix', '=', 'https'),('auth_type', '=', 'http_auth')]}"/>
+                      <field name="user_password" attrs="{'invisible':['|',('auth_type', '!=', 'http_auth'),('url_prefix', '!=', 'https')],'required':[('url_prefix', '=', 'https'),('auth_type', '=', 'http_auth')]}"/>
+                      <field name="other_auth_detail" attrs="{'invisible':[('auth_type', '!=', 'other')],'required':[('auth_type', '=', 'other')]}"/>
+
+                    </group>
+
+                </sheet>
+            </form>
+	      </field>
+	    </record>
+
+
+        <record model="ir.ui.view" id="elastic_connection_view_tree">
+			<field name="name">Elastic Connection Tree</field>
+			<field name="model">elastic.connection</field>
+			<field name="arch" type="xml">
+				<tree create="false">
+                    <field name="name"/>
+
+				</tree>
+			</field>
+	    </record>
+
+
+
+        <record id="elastic_connection_action" model="ir.actions.act_window">
+            <field name="name">Elastic Connection Configuration</field>
+            <field name="res_model">elastic.connection</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <menuitem id="elastic_connection_configuration"
+                  name="Connection Setting"
+                  parent="elastic_search_config_menu"
+                  action="elastic_connection_action"
+                  sequence="2"
+                />
+    </data>
+</odoo>

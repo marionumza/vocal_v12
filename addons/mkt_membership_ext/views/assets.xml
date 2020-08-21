@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="assets_frontend_mp_membership" inherit_id="website.assets_frontend" name="Assets Frontend Membership">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/mkt_membership_ext/static/src/css/mp_membership.css" media="all" type="text/css"/>
+                <script src="/mkt_membership_ext/static/src/js/pricing_switcher.js"></script>
+            </xpath>
+        </template>
+    </data>
+</odoo>

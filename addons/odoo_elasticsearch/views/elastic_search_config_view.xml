@@ -1,0 +1,162 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="elastic_search_config_form_view">
+	      <field name="name">Elastic Search Config Form</field>
+	      <field name="model">elastic.search.config</field>
+	      <field name="type">form</field>
+	      <field name="priority" eval="1"/>
+	      <field name="arch" type="xml">
+	      	<form  >
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+
+                    </div>
+
+                     <div class="oe_title">
+                         <h1>
+                            <field name="name" default_focus="1" placeholder="Name" />
+                         </h1>
+                    </div>
+
+                     <notebook>
+
+                        <page string="Website Settings">
+                            <group string="Products Suggestion" >
+                                <div><b><span>Enable product Suggesstion    </span></b>
+
+                                        <field name="enable_product" class="oe_inline"/>⁣
+                                    </div>
+                            </group>
+
+                            <group col="4">
+                                <field name="product_index_id" widget="selection" attrs="{'invisible':[('enable_product', '=', False)], 'required':[('enable_product', '=', True)]}"/>
+                                <field name="prdct_sugg_position" attrs="{'invisible':[('enable_product', '=', False)], 'required':[('enable_product', '=', True)]}" invisible="1"/>
+                                <field name="is_prdct_thumb" attrs="{'invisible':[('enable_product', '=', False)], 'required':[('enable_product', '=', True)]}"/>
+                                <field name="max_prdct_sugg" attrs="{'invisible':[('enable_product', '=', False)], 'required':[('enable_product', '=', True)]}"/>
+
+                                <field name="is_prdct_desc" attrs="{'invisible':[('enable_product', '=', False)], 'required':[('enable_product', '=', True)]}"/>
+
+
+                                <field name="max_prdct_desc" attrs="{'invisible':['|',('enable_product', '=', False),('is_prdct_desc','=',False)], 'required':[('is_prdct_desc', '=', True)]}"/>
+                                <!--<field name="is_prdct_price" attrs="{'invisible':[('enable_product', '=', False)], 'required':[('enable_product', '=', True)]}"/>-->
+                            </group>
+
+
+                            <div><b><span>Enable Trending keywords in website </span></b>
+
+                              <button type="object" name="create_trend_index" class="oe_highlight"  string="Create Index" help="Button used to create index in elastic server" attrs="{'invisible':['|','|','|',('trending_state', '=', 'create'),('trending_state', '=', 'enable'),('trending_state', '=', 'disable'),('trending_state', '=', 'error')]}" style="margin-left: 10px;" />
+                              <button type="object" name="enable_trend_search" class="oe_highlight" string="Enable" help="Button used to enable trending key in website" attrs="{'invisible':['|','|',('trending_state', '=', 'enable'),('trending_state', '=', 'delete'),('trending_state', '=', 'error')]}" style="margin-left: 10px;" />
+                              <button type="object" name="disable_trend_search" class="oe_highlight" string="Disable" help="Button used to disable trending key in website" attrs="{'invisible':['|','|','|',('trending_state', '=', 'disable'),('trending_state', '=', 'create'),('trending_state', '=', 'delete'),('trending_state', '=', 'error')]}"  style="margin-left: 10px;" />
+                              <button type="object" name="delete_trend_index" class="oe_highlight"  string="Delete Index" help="Button used to delete index in elastic server" attrs="{'invisible':[('trending_state', '=', 'delete')]}" style="margin-left: 10px;" confirm="Are you sure you want to delete the elastic server records?" />
+                              <field name="trending_state" widget="statusbar" style="position: relative;left: 85px;" statusbar_visible="enable,disable"/>
+                            </div>
+                        </page>
+
+
+
+                          <page string="Advance Settings">
+                                <group string="Auto Completion" >
+                                    <div><b><span>Start searching after first  </span>
+                                        <field name="start_limit" class="oe_inline"/>⁣
+                                        <span>  characters</span></b>
+                                    </div>
+                                    <br/>
+                                    <div><b><span>Resize the Search menu </span>
+                                        <field name="resize_menu" class="oe_inline"/>
+                                        <span>  px</span></b>
+                                    </div>
+
+                                </group>
+
+                                <group string="Stylesheet" col="4">
+                                    <field name="hover_text_color" widget="color"/>
+                                    <field name="hover_background_color" widget="color"/>
+                                    <field name="text_color" widget="color"/>
+                                    <field name="desc_color" widget="color"/>
+
+
+                                </group>
+
+                        </page>
+
+                         <page string="Cron Settings">
+                             <group col="4">
+
+                                     <field name="cron_id" string="Corresponding Cron" attrs="{'readonly':[('cron_state', '=', 'start')]}"/><newline/>
+                                     <field name="interval_number" attrs="{'required':[('cron_id','!=', False)],'readonly':[('cron_state', '=', 'start')]}"  style="width: 40px;"/>
+                                     <field name="interval_type" attrs="{'required':[('cron_id', '!=', False)],'readonly':[('cron_state', '=', 'start')]}" nolabel="1" style="position: relative;right: 200px;top: 2px;width: 164px;" />
+                                     <newline/>
+                                     <field name="next_call" attrs="{'required':[('cron_state', '!=', 'stop')],'readonly':[('cron_state', '=', 'start')]}"/>
+
+                             </group>
+                             <group>
+                                <group>
+                                     <button type="object" name="start_crone" string="Start" attrs="{'invisible':[('cron_state', '=', 'start')]}"/>
+                                     <button type="object" name="stop_crone" string="Stop" style="position: relative;right: 135px;" attrs="{'invisible':[('cron_state', '=', 'stop')]}"/>
+
+                                    <field name="cron_state" widget="statusbar" nolabel="1" style="position: relative;left: 200px;bottom: 30px;"/>
+                                 </group>
+                             </group>
+                        </page>
+
+                        <page string="Trending Search" attrs="{'invisible':[('trending_state', '!=', 'enable')]}">
+
+                						<br/>
+                						<div>
+                							<b><span>Import all Trending keywords / Popular keywords from elastic server </span></b>
+                             					<button type="object" name="sycronise_trend_search" class="oe_highlight" string="Import" />
+                           				 </div>
+                						<br/>
+                						<div class="o_horizontal_separator">
+                      				Trending Keywords
+                  					</div>
+                							<field name='trend_search_mapping_ids' string="Keys" >
+
+                								<tree editable="bottom" string="Fields" >
+                									<field name="name"  />
+                									<field name="sequence" invisible="1" />
+                									<field name="trend_search_mapping_id" invisible="1"/>
+                								</tree>
+                							</field>
+
+                				</page>
+
+                    </notebook>
+
+	      		</sheet>
+            </form>
+	      </field>
+	    </record>
+
+
+        <record model="ir.ui.view" id="elastic_search_config_view_tree">
+			<field name="name">Elastic Search Config Tree</field>
+			<field name="model">elastic.search.config</field>
+			<field name="arch" type="xml">
+				<tree>
+                    <field name="name"/>
+
+
+				</tree>
+			</field>
+	    </record>
+
+        <record id="elastic_search_config_action" model="ir.actions.act_window">
+            <field name="name">Website Elastic Search Setting </field>
+            <field name="res_model">elastic.search.config</field>
+            <field name="view_type">form</field>
+        </record>
+
+
+
+		<menuitem name="Configuration" id="elastic_search_config_menu" parent="elastic_search_menu_base_root"/>
+        <menuitem id="elastic_search_configuration"
+                  name="Elastic Setting"
+                  parent="elastic_search_config_menu"
+                  action="elastic_search_config_action"
+                  sequence="1"/>
+    </data>
+</odoo>

@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_easyship_category_public,easyship_category_public,model_easyship_category,,1,1,1,0
+access_easyship_category_salesman,easyship_carrier_salesman,model_easyship_category,sales_team.group_sale_salesman,1,1,1,0
+access_easyship_category_manager,easyship_category_sales_manager,model_easyship_category,sales_team.group_sale_manager,1,1,1,1
+access_es_service_charge_public,es_service_charge_public,model_es_service_charge,,1,1,1,0
+access_es_service_charge_salesman,es_service_charge_salesman,model_es_service_charge,sales_team.group_sale_salesman,1,1,1,0
+access_es_service_charge_manager,es_service_charge_sales_manager,model_es_service_charge,sales_team.group_sale_manager,1,1,1,1

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="assets_backend" name="website_checkout_ext assets" inherit_id="website.assets_frontend">
+            <xpath expr="//script[contains(@src, 'shipping_per_product/static/src/js/sol_delivery_carrier.js')]" position="replace">
+                <script type="text/javascript" src="/easyship_delivery_extended/static/src/js/sol_delivery_carrier.js"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

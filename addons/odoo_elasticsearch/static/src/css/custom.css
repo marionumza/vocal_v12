@@ -1,0 +1,37 @@
+
+.left {
+  float: left;
+ /*  margin: 2px 10px; */
+  display: inline
+}
+.right {
+  float: left;
+   margin: 2px 10px;
+  display: inline
+}
+
+
+.prdct_descp{
+    font-size: 10px;
+}
+
+
+/*    dropdown div  */
+
+
+.dropdown1 .dropdown2 {
+    position: absolute;
+    border: 1px solid grey;
+    display: none;
+    z-index: 10;
+    background: white;
+    text-align: left;
+    padding: 0px 10px 0px;
+}
+
+/*#recent_search{
+  background: grey;
+}
+#trending_search{
+  background: grey;
+}*/

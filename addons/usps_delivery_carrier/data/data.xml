@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+      <!-- Copyright (c) 2017-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+      <!-- See LICENSE URL <https://store.webkul.com/license.html/> for full copyright and licensing details. -->
+        <record forcecreate= "True" id= "FIRST_CLASS" model= "delivery.carrier.usps.service">
+             <field name= "name">First Class </field>
+            <field name= "code">FIRST CLASS</field>
+        </record>
+        <record forcecreate= "True" id= "PRIORITY" model= "delivery.carrier.usps.service">
+            <field name= "name">Priority </field>
+            <field name= "code">PRIORITY</field>
+        </record>
+        <record forcecreate= "True" id= "EXPRESS" model= "delivery.carrier.usps.service">
+             <field name= "name">Express</field>
+            <field name= "code">EXPRESS</field>
+        </record>
+        <record forcecreate= "True" id= "STANDARD" model= "delivery.carrier.usps.service">
+            <field name= "name">Standard Post</field>
+            <field name= "code">Standard Post</field>
+        </record>
+        <record forcecreate= "True" id= "MEDIAMAIL" model= "delivery.carrier.usps.service">
+            <field name= "name">Media Mail</field>
+            <field name= "code">Media Mail</field>
+        </record>
+        <record forcecreate= "True" id= "LIBRARYMAIL" model= "delivery.carrier.usps.service">
+             <field name= "name">Library Mail</field>
+            <field name= "code">Library Mail</field>
+        </record>
+
+
+         <record forcecreate= "True" id= "LETTER" model= "delivery.carrier.usps.firstclassmailtype">
+            <field name= "name">Letter</field>
+            <field name= "code">LETTER</field>
+        </record>
+         <record forcecreate= "True" id= "FLAT" model= "delivery.carrier.usps.firstclassmailtype">
+            <field name= "name">Flat</field>
+            <field name= "code">FLAT</field>
+        </record>
+         <record forcecreate= "True" id= "PARCEL" model= "delivery.carrier.usps.firstclassmailtype">
+            <field name= "name">Parcel</field>
+            <field name= "code">PARCEL</field>
+        </record>
+         <record forcecreate= "True" id= "POSTCAD" model= "delivery.carrier.usps.firstclassmailtype">
+            <field name= "name">Postcard</field>
+            <field name= "code">POSTCAD</field>
+        </record>
+
+        <record forcecreate= "True" id= "VARIABLE" model= "product.packaging">
+            <field name= "name">Variable</field>
+            <field name= "shipper_package_code">VARIABLE</field>
+            <field name='package_carrier_type'>usps</field>
+            <field name= "qty">10</field>
+            <field name= "max_weight">31</field>
+            <field name= "height">11</field>
+            <field name= "width">11</field>
+            <field name= "length">11</field>
+            <field name= "girth">11</field>
+        </record>
+
+        <record forcecreate= "True" id= "VARIABLE" model= "product.packaging">
+            <field name= "name">Variable</field>
+            <field name= "shipper_package_code">VARIABLE</field>
+            <field name='package_carrier_type'>usps</field>
+            <field name= "qty">10</field>
+            <field name= "max_weight">31</field>
+            <field name= "height">11</field>
+            <field name= "width">11</field>
+            <field name= "length">11</field>
+            <field name= "girth">11</field>
+        </record>
+
+
+
+         <record forcecreate= "True" id= "FLATRATEBOX" model= "product.packaging">
+            <field name= "name">FLAT RATE ENVELOPE</field>
+            <field name= "shipper_package_code">FLAT RATE ENVELOPE</field>
+            <field name='package_carrier_type'>usps</field>
+            <field name= "qty">10</field>
+            <field name= "max_weight">31</field>
+            <field name= "height">11</field>
+            <field name= "width">11</field>
+            <field name= "length">11</field>
+            <field name= "girth">11</field>
+        </record>
+
+
+        <record forcecreate= "True" id= "Padded Flat Rate Envelope" model= "product.packaging">
+            <field name= "name">Padded Flat Rate Envelope</field>
+            <field name= "shipper_package_code">PADDED FLAT RATE ENVELOPE</field>
+            <field name='package_carrier_type'>usps</field>
+            <field name= "qty">10</field>
+            <field name= "max_weight">31</field>
+            <field name= "height">11</field>
+            <field name= "width">11</field>
+            <field name= "length">11</field>
+            <field name= "girth">11</field>
+        </record>
+         <record forcecreate= "True" id= "Window Flat Rate Envelope" model= "product.packaging">
+            <field name= "name">Window Flat Rate Envelope</field>
+            <field name= "shipper_package_code">WINDOW FLAT RATE ENVELOPE</field>
+            <field name='package_carrier_type'>usps</field>
+            <field name= "qty">10</field>
+            <field name= "max_weight">31</field>
+            <field name= "height">11</field>
+            <field name= "width">11</field>
+            <field name= "length">11</field>
+            <field name= "girth">11</field>
+        </record>
+        <record forcecreate= "True" id= "Gift Card Flat Rate Envelope" model= "product.packaging">
+            <field name= "name">Gift Card Flat Rate Envelope</field>
+            <field name= "shipper_package_code">GIFT CARD FLAT RATE ENVELOPE</field>
+            <field name='package_carrier_type'>usps</field>
+            <field name= "qty">10</field>
+            <field name= "max_weight">31</field>
+            <field name= "height">11</field>
+            <field name= "width">11</field>
+            <field name= "length">11</field>
+            <field name= "girth">11</field>
+        </record>
+
+         <record forcecreate= "True" id= "MD FLAT RATE BOX" model= "product.packaging">
+            <field name= "name">MD Flat Rate Box</field>
+            <field name= "shipper_package_code">MD FLAT RATE BOX</field>
+            <field name='package_carrier_type'>usps</field>
+            <field name= "qty">10</field>
+            <field name= "max_weight">31</field>
+            <field name= "height">11</field>
+            <field name= "width">11</field>
+            <field name= "length">11</field>
+            <field name= "girth">11</field>
+        </record>
+         <record forcecreate= "True" id= "SM FLAT RATE BOX" model= "product.packaging">
+            <field name= "name">SM Flat Rate Box</field>
+            <field name= "shipper_package_code">SM FLAT RATE BOX</field>
+            <field name='package_carrier_type'>usps</field>
+            <field name= "qty">10</field>
+            <field name= "max_weight">31</field>
+            <field name= "height">11</field>
+            <field name= "width">11</field>
+            <field name= "length">11</field>
+            <field name= "girth">11</field>
+        </record>
+         <record forcecreate= "True" id= "LG FLAT RATE BOX" model= "product.packaging">
+            <field name= "name">LG Flat Rate Box</field>
+            <field name= "shipper_package_code">LG FLAT RATE BOX</field>
+            <field name='package_carrier_type'>usps</field>
+            <field name= "qty">10</field>
+            <field name= "max_weight">31</field>
+            <field name= "height">11</field>
+            <field name= "width">11</field>
+            <field name= "length">11</field>
+            <field name= "girth">11</field>
+        </record>
+        <record forcecreate= "True" id= "Legal Flat Rate Envelope" model= "product.packaging">
+            <field name= "name">Legal Flat Rate Envelope</field>
+            <field name= "shipper_package_code">LEGAL FLAT RATE ENVELOPE</field>
+            <field name='package_carrier_type'>usps</field>
+            <field name= "qty">10</field>
+            <field name= "max_weight">31</field>
+            <field name= "height">11</field>
+            <field name= "width">11</field>
+            <field name= "length">11</field>
+            <field name= "girth">11</field>
+        </record>
+
+
+        <record forcecreate= "True" id= "RECTANGULAR" model= "product.packaging">
+            <field name= "name">Rectangular</field>
+            <field name= "shipper_package_code">RECTANGULAR</field>
+            <field name='package_carrier_type'>usps</field>
+            <field name= "qty">10</field>
+            <field name= "max_weight">31</field>
+            <field name= "height">11</field>
+            <field name= "width">11</field>
+            <field name= "length">11</field>
+            <field name= "girth">11</field>
+        </record>
+         <record forcecreate= "True" id= "NONRECTANGULAR" model= "product.packaging">
+            <field name= "name">Non Rectangular</field>
+            <field name= "shipper_package_code">NONRECTANGULAR</field>
+            <field name='package_carrier_type'>usps</field>
+            <field name= "qty">10</field>
+            <field name= "max_weight">31</field>
+            <field name= "height">11</field>
+            <field name= "width">11</field>
+            <field name= "length">11</field>
+            <field name= "girth">11</field>
+        </record>
+
+        <record forcecreate= "True" id= "REGIONALRATEBOXA" model= "product.packaging">
+            <field name= "name">REGIONALRATEBOXA</field>
+            <field name= "shipper_package_code">REGIONALRATEBOXA</field>
+            <field name='package_carrier_type'>usps</field>
+            <field name= "qty">10</field>
+            <field name= "max_weight">31</field>
+            <field name= "height">11</field>
+            <field name= "width">11</field>
+            <field name= "length">11</field>
+            <field name= "girth">11</field>
+        </record>
+         <record forcecreate= "True" id= "REGIONALRATEBOXB" model= "product.packaging">
+            <field name= "name">REGIONALRATEBOXB</field>
+            <field name= "shipper_package_code">REGIONALRATEBOXB</field>
+            <field name='package_carrier_type'>usps</field>
+            <field name= "qty">10</field>
+            <field name= "max_weight">31</field>
+            <field name= "height">11</field>
+            <field name= "width">11</field>
+            <field name= "length">11</field>
+            <field name= "girth">11</field>
+        </record>
+         <record forcecreate= "True" id= "REGIONALRATEBOXC" model= "product.packaging">
+            <field name= "name">REGIONALRATEBOXC</field>
+            <field name= "shipper_package_code">REGIONALRATEBOXC</field>
+            <field name='package_carrier_type'>usps</field>
+            <field name= "qty">10</field>
+            <field name= "max_weight">31</field>
+            <field name= "height">11</field>
+            <field name= "width">11</field>
+            <field name= "length">11</field>
+            <field name= "girth">11</field>
+        </record>
+    </data>
+</openerp>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="multi_product_internal_ref_generate_view" model="ir.ui.view">
+        <field name="name">generate.sku.form.view</field>
+        <field name="model">generate.sku</field>
+        <field name="arch" type="xml">
+            <form string="Generate/Update Product SKU">
+                <div class="alert alert-warning info_icon" role="alert">
+                    <span class="fa fa-lightbulb-o fa-lg">
+                        <strong> Warning!!!</strong>
+                    </span>
+                    <p>
+                        <br/>
+                        Before processing, make sure everything configured correctly. <br/>
+                        Odoo will update existing internal reference if Overwrite Existing configured.
+                    </p>
+                </div>
+                <footer>
+                    <button string="Process" name="do_generate_or_update" type="object" default_focus="1" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window
+            id="action_generate_product_sku"
+            name="Generate/Update SKU"
+            res_model="generate.sku"
+            src_model="product.product"
+            key2="client_action_multi"
+            multi="True"
+            view_mode="form"
+            target="new"
+            view_type="form"
+    />
+</odoo>

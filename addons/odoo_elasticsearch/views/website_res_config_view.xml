@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="website_settings_elastic_search" model="ir.ui.view">
+            <field name="name">website.elastic.form</field>
+            <field name="model">website</field>
+            <field name="inherit_id" ref="website.view_website_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='other']" position='before'>
+                    <div name="Elastic Search">
+                        <separator string="Elastic Search"/>
+                        <group name="elastic">
+                            <field name="elastic_set_id" widget="selection"/>
+                        </group>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+
+</odoo>

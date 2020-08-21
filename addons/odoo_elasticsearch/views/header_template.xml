@@ -1,0 +1,49 @@
+<odoo>
+<template id="assets_frontend_affiliate" inherit_id="website.assets_frontend" name="Website Affiliate">
+    <xpath expr="." position="inside">
+        <link rel='stylesheet' href='/odoo_elasticsearch/static/src/css/custom.css'/>
+        <script type="text/javascript" src='/odoo_elasticsearch/static/src/js/custom.js'></script>
+        <script type="text/javascript" src='/odoo_elasticsearch/static/src/js/trend_recent.js'></script>
+        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel = "Stylesheet" type="text/css" />
+        <script>
+               function CheckSelected() {
+                   var array = JSON.parse(localStorage.getItem("RecentSearch"));
+                   $("ul.ui-autocomplete li:lt("+(array.length+1)+")").remove();
+                    localStorage.setItem("RecentSearch", JSON.stringify([]));
+               }
+             </script>
+    </xpath>
+  </template>
+
+    <template id="website_search_box1" inherit_id="website.website_search_box" name="Website Searchbox">
+            <xpath expr="//input[@name='search']" position="after">
+
+                <ul class="dropdown1 dropdown-menu" t-attf-style="width :{{request.website.elastic_set_id.resize_menu}}px;" id="recentSearches">
+                    <center><img src="/odoo_elasticsearch/static/description/loader1.gif" id="dropdown-loader"/></center>
+                </ul>
+
+                <ul class="dropdown2 dropdown-menu" t-attf-style="width :{{request.website.elastic_set_id.resize_menu}}px; color:{{request.website.elastic_set_id.text_color}};" id="recentSearches">
+                    <p> <span id="no-result-found" style="margin-left: 15px;">Sorry, nothing found for </span> </p>
+                </ul>
+
+                <div>
+                    <input type="hidden" id="search_start_limit" name="start_limit" t-att-value="request.website.elastic_set_id.start_limit"/>
+                    <input type="hidden" id="max_prdct_sugg" name="max_prdct_sugg" t-att-value="request.website.elastic_set_id.max_prdct_sugg"/>
+                    <input type="hidden" id="text_color" name="text_color" t-att-value="request.website.elastic_set_id.text_color"/>
+                    <input type="hidden" id="hover_text_color" name="hover_text_color" t-att-value="request.website.elastic_set_id.hover_text_color"/>
+                    <input type="hidden" id="hover_background_color" name="hover_background_color" t-att-value="request.website.elastic_set_id.hover_background_color"/>
+                    <input type="hidden" id="base_url" name="base_url" t-att-value="request.env['ir.config_parameter'].sudo().get_param('web.base.url')"/>
+                    <input type="hidden" id="is_prdct_desc" name="is_prdct_desc" t-att-value="request.website.elastic_set_id.is_prdct_desc"/>
+                    <input type="hidden" id="is_prdct_thumb" name="is_prdct_thumb" t-att-value="request.website.elastic_set_id.is_prdct_thumb"/>
+                    <input type="hidden" id="max_prdct_desc" name="max_prdct_desc" t-att-value="request.website.elastic_set_id.max_prdct_desc"/>
+                    <input type="hidden" id="index_name" name="index_name" t-att-value="request.website.elastic_set_id.product_index_id.name"/>
+                    <input type="hidden" id="doc_type" name="doc_type" t-att-value="request.website.elastic_set_id.product_index_id.doc_type"/>
+                    <input type="hidden" id="desc_color" name="index_name" t-att-value="request.website.elastic_set_id.desc_color"/>
+                    <input type="hidden" id="resize_menu" name="resize_menu" t-att-value="request.website.elastic_set_id.resize_menu"/>
+                    <input type="hidden" id="connectionInfo" name="connectionInfo" t-att-value="request.website.elastic_set_id.connectionInfo().get('url')"/>
+                    <input type="hidden" id="trending_searches" name="checktrending" t-att-value="request.env['elastic.search.config'].sudo().fetch_trending_search()"/>
+                </div>
+            </xpath>
+        </template>
+
+  </odoo>

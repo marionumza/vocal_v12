@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates>
+
+    <t t-name="easyship_delivery_extended.easyship_delivery_service">
+        <div class="oe_structure clearfix mt-3" id="oe_structure_website_sale_payment_1"/>
+
+        <div t-if="es_service_ids" class="delivery_services">
+            <td colspan="4" style="padding:0;border: 0;">
+                <t t-set="dev_services" t-value="es_service_ids"/>
+                <div class="card border-0" t-att-id="'delivery_services_'+order_line_id">
+                    <ul class="list-group">
+                        <t t-foreach="dev_services" t-as="service">
+                            <li class="list-group-item">
+                                <input t-att-value="service.id" t-att-for="'service_'+service.id" type="radio"
+                                       t-att-id="'service_'+service.id"
+                                       t-att-delivery_method_id="delivery_method_id"
+                                       t-att-sale_order_line_id="order_line_id" t-att-name="'service_type_'+order_line_id"
+                                       t-att-checked="es_service_id and es_service_id.id == service.id and 'checked' or False"/>
+                                <label class="label-optional" t-att-for="'service_'+service.id">
+                                    <t t-esc="service.service_name"/>
+                                </label>
+                                <label class="label-optional" t-att-for="'service_'+service.id" style="padding-right:5px;">(
+                                    <t t-esc="service.delivery_time"/>
+                                    )
+                                </label>
+                                <span t-if="service.total_charge > 0.0" class="float-right badge badge-secondary"
+                                      titel="Total Charge" t-esc="service.total_amount_format"/>
+                            </li>
+                        </t>
+                    </ul>
+                </div>
+            </td>
+        </div>
+    </t>
+
+</templates>

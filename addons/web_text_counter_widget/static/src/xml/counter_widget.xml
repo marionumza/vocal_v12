@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+    <t t-name="web_text_counter_widget.text_count">
+        <span class="float-right"><span class="text-muted o_text_count"></span></span>
+    </t>
+</templates>

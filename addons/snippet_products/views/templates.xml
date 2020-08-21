@@ -1,0 +1,43 @@
+<odoo>
+    <template id="snippet_product" inherit_id="website.snippets">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="snippet_products.template_snippet_product"
+               t-thumbnail="/snippet_products/static/src/img/slider_style_1.jpg"/>
+        </xpath>
+    </template>
+
+    <template id="template_snippet_product" name="Product Brand">
+        <section class="">
+            <div class="container-fluid" style="">
+                <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="product-grid">
+                                <div class="product-image">
+                                    <a href="#">
+                                        <img class="pic-1"
+                                             src="http://bestjquery.com/tutorial/product-grid/demo9/images/img-1.jpg"/>
+                                    </a>
+                                </div>
+                                <ul class="rating">
+                                    <li class="fa fa-star"></li>
+                                    <li class="fa fa-star"></li>
+                                    <li class="fa fa-star"></li>
+                                    <li class="fa fa-star"></li>
+                                    <li class="fa fa-star disable"></li>
+                                </ul>
+                                <div class="product-content">
+                                    <h3 class="title">
+                                        <a href="#">Women's Blouse</a>
+                                    </h3>
+                                    <div class="price">$16.00
+                                        <span>$20.00</span>
+                                    </div>
+<!--                                    <a class="add-to-cart" t-att-href="product.get('link_url')">+ Add To Cart</a>-->
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

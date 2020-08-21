@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--======================== Inclusion of Scss Files ======================-->
+    <template id="amazon_affiliate_assets_frontend" inherit_id="website.assets_frontend">
+        <xpath expr="link[last()]" position="after">
+            <link rel="stylesheet" type="text/scss"
+				href="/amazon_affiliate/static/src/css/amazon_affiliate.css" />
+        </xpath>
+    </template>
+</odoo>

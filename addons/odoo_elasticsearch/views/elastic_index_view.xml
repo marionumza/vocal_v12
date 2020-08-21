@@ -1,0 +1,133 @@
+<odoo>
+    <data>
+
+          <record id="open_record_mapping_tree" model="ir.actions.act_window">
+            <field name="name">Mappings</field>
+            <field name="res_model">elastic.record.mapping</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('elastic_index_id','=', active_id)]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+
+              </p>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="elastic_search_form_view">
+	      <field name="name">Elastic Index Form</field>
+	      <field name="model">elastic.index</field>
+	      <field name="type">form</field>
+	      <field name="priority" eval="1"/>
+	      <field name="arch" type="xml">
+	      	<form create="false" >
+                <header>
+                    <button type="object" name="field_mapping_button" string="Create Mapping"   states="draft,error"/>
+                    <button type="object" name="forcely_update_button" string="Forcely Update"  states="done"/>
+                    <button type="object" name="import_data_button" string="Create/Update index" class="oe_highlight oe_view_mode_only"  states="done"/>
+                    <button type="object" name="get_data_button" string="Get Data" invisible="1"/>
+                    <button type="object" name="delete_index_button" string="Reset"
+                    confirm="Are you sure you want to do this? It will delete the index and their mapping." states="done,error"/>
+
+
+                  <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                </header>
+                <sheet>
+
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="action" name="%(open_record_mapping_tree)d" icon="fa-book"  >
+                            <field name="mapping_count" widget="statinfo" string="Record Mapping"/>
+                        </button>
+                    </div>
+                     <group string="Elastic Search Parameter" col="4">
+                         <field name='model_id'  widget="selection" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                         <field name='domain'/>
+                         <field name='limit' attrs="{'readonly': [('state', '=', 'done')]}"/>
+                         <field name='name' attrs="{'readonly': [('state', '=', 'done')]}"/>
+                         <field name='last_sync_date' readonly="1"/>
+                         <field name='doc_type' invisible="1" attrs="{'readonly': [('state', '=', 'done')]}"/>
+
+                    </group>
+
+                    <notebook>
+
+                        <page string="Field Detail">
+                             <div class="oe_inline">
+                            <field name="elastic_fields_mapping_ids" attrs="{'readonly': [('state', '=', 'done')]}">
+                                <tree editable="bottom" string="Fields" >
+                                    <field name="model_id" invisible="1"/>
+                                    <field name="field_mapping_id" options="{'no_create': True}" invisible="1"/>
+                                    <field name="field_id" options="{'no_create': True}"  domain="[('model_id','=',model_id),('ttype','in',('char','boolean','text'))]" />
+                                    <field name="field_type"  />
+                                    <field name="searchable" invisible="1"/>
+                                </tree>
+                            </field>
+                        </div>
+                        </page>
+                        <page string="Filter Detail">
+                            <div class="oe_inline">
+                                <field name="elastic_domain_fields_ids" attrs="{'readonly': [('state', '=', 'done')]}">
+                                    <tree editable="bottom" string="Fields" >
+                                        <field name="model_id" invisible="1"/>
+                                        <field name="domain_field_id" invisible="1"/>
+                                        <field name="field_name" options="{'no_create': True}" domain="[('model_id','=',model_id),('ttype','in',('char','boolean','text','datetime'))]" />
+                                        <field name="field_operator"/>
+                                        <field name="field_value" attrs="{'readonly': [('field_operator', 'in', ['true','false'])],'required': [('field_operator', 'not in', ['true','false'])]}" />
+                                    </tree>
+                                </field>
+                            </div>
+                        </page>
+
+                        <page string="Note">
+                            <field name='description'/>
+                        </page>
+                    </notebook>
+	      		</sheet>
+	      	</form>
+	      </field>
+	    </record>
+
+         <record model="ir.ui.view" id="elastic_index_view_tree">
+			<field name="name">elastic.index.tree</field>
+			<field name="model">elastic.index</field>
+			<field name="arch" type="xml">
+				<tree create="false">
+                    <field name="name"/>
+                    <field name="model_id"/>
+                    <field name="domain"/>
+                    <field name="last_sync_date"/>
+
+
+				</tree>
+			</field>
+	    </record>
+
+
+
+        <record id="elastic_search_action" model="ir.actions.act_window">
+            <field name="name">Elastic Index </field>
+            <field name="res_model">elastic.index</field>
+            <field name="view_type">form</field>
+        </record>
+
+
+        <menuitem name="Elastic Search"
+                  id="elastic_search_menu_base_root"
+                  groups="base.group_system"
+                  sequence="214"
+                  web_icon="odoo_elasticsearch,static/description/icon.png"
+
+        />
+		<menuitem name="Elastic Search"
+                  id="elastic_search_main_menu"
+                  parent="elastic_search_menu_base_root"
+                  sequence="1"
+        />
+        <menuitem id="elastic_search_index_menu"
+                  name="Elastic Index Mapping"
+                  parent="elastic_search_main_menu"
+                  action="elastic_search_action"
+                  sequence="1"
+        />
+    </data>
+</odoo>

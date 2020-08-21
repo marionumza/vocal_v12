@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="provider_wx" model="auth.oauth.provider">
+            <field name="name">微信登录</field>
+            <field name="auth_endpoint">https://open.weixin.qq.com/connect/oauth2/authorize</field>
+            <field name="scope">snsapi_base</field>
+            <field name="validation_endpoint">https://api.weixin.qq.com/sns/userinfo</field>
+            <field name="data_endpoint"></field>
+            <field name="body">微信登录</field>
+            <field name="enabled" eval="True"/>
+        </record>
+        <record id="provider_qywx" model="auth.oauth.provider">
+            <field name="name">企业微信登录</field>
+            <field name="auth_endpoint">https://open.weixin.qq.com/connect/oauth2/authorize</field>
+            <field name="scope">snsapi_base</field>
+            <field name="validation_endpoint">https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo</field>
+            <field name="data_endpoint">https://qyapi.weixin.qq.com/cgi-bin/user/get</field>
+            <field name="body">企业微信登录</field>
+            <field name="enabled" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

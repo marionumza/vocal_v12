@@ -1,0 +1,42 @@
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="elastic_field_mapping_form">
+	      <field name="name">elastic.field.mapping.form</field>
+	      <field name="model">elastic.field.mapping</field>
+	      <field name="type">form</field>
+	      <field name="priority" eval="1"/>
+	      <field name="arch" type="xml">
+	      	  <form string="Elastic Field Mapping">
+                    <group class="oe_title">
+
+                        <field name="field_mapping_id" options="{'no_create': True}"/>
+                        <field name="model_id" invisible="1"/>
+                        <field name="field_id" options="{'no_create': True}" domain="[('model_id','=',model_id),('ttype','in',('char','boolean','text'))]"/>
+                         <field name="name" invisible="1"/>
+                        <field name="field_type"/>
+                        <field name="searchable" invisible="1"/>
+                    </group>
+
+                </form>
+	      </field>
+	  </record>
+
+
+
+        <record id="elastic_field_mapping_action" model="ir.actions.act_window">
+            <field name="name">Elastic Field Mapping </field>
+            <field name="res_model">elastic.field.mapping</field>
+            <field name="view_type">form</field>
+        </record>
+
+
+         <!--<menuitem id="elastic_field_mapping_menu"-->
+                  <!--name="Index Field Mapping"-->
+                  <!--parent="elastic_search_main_menu"-->
+                  <!--action="elastic_field_mapping_action"-->
+                  <!--sequence="2"-->
+        <!--/>-->
+
+
+	</data>
+</odoo>

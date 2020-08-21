@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+	    <record id="show_seller_delivery_carrier_only_rule" model="ir.rule">
+	        <field name="name">Delivery Method Per Seller</field>
+	        <field name="model_id" ref="delivery.model_delivery_carrier"/>
+            <field name="domain_force">[('marketplace_seller_id','=',user.partner_id.id)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+	        <field name="groups" eval="[(4, ref('odoo_marketplace.marketplace_seller_group'))]"/>
+	    </record>
+
+	    <record id="show_global_delivery_carrier_only_rule" model="ir.rule">
+	        <field name="name">Global Delivery Method Readonly for Seller</field>
+	        <field name="model_id" ref="delivery.model_delivery_carrier"/>
+            <field name="domain_force">[('is_global_delivery_method','=', True)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+	        <field name="groups" eval="[(4, ref('odoo_marketplace.marketplace_seller_group'))]"/>
+	    </record>
+
+	    <record id="show_all_delivery_carrier_rule" model="ir.rule">
+	        <field name="name">Delivery Method All</field>
+	        <field name="model_id" ref="delivery.model_delivery_carrier"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+	        <field name="groups" eval="[(4, ref('odoo_marketplace.marketplace_manager_group'))]"/>
+	    </record>
+    </data>
+</odoo>

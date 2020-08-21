@@ -1,0 +1,2 @@
+./odoo-bin --addons=addons/,../vijay/vocal/addons/,../vijay/vocal/custom/,../vijay/vocal/custom/rma/,../vijay/vocal/muk_web_theme/ -d vocal_v12
+

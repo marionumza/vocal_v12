@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="marketplace_membership.wk_mp_membership_plan" name="Seller Membership Plans">
+            <t t-call="website.layout">
+                <t t-set="pageName" t-value="'homepage'"/>
+                <div class="oe_structure">
+                    <div class="oe_structure"/>
+                    <div class="oe_structure"/>
+                    <section class="te_s_text_image pt24">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="pt16 pb16 col-lg-11">
+                                    <h6 class="te_title_t">Membership</h6>
+                                    <h3 class="te_bold_text">Paid Membership Gives You More!&amp;nbsp;</h3>
+                                    <h5 class="mb16 te_small_text">Standard and Elite membership gives you the lowest fees and full access.</h5>
+                                    <p class="te_content_text">Tests should be FREE- that is why we allow sellers to upload one product without any sales cap.</p>
+                                    <p class="te_content_text">If you plan to sell your wearable products to a wider audience, then our premium memberships are made for you!</p>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="s_features_grid pt48 pb24">
+                        <div class="container">
+                            <div class="row te_features_design">
+                                <div class="col-lg-6 s_col_no_bgcolor">
+                                    <div class="row te_features_design">
+                                        <div class="col-lg-12" data-name="Box">
+                                            <h4>BUYER BENEFITS</h4>
+                                            <h5 class="te_space_text text-primary">Wearables only platform to buy up-and-coming products straight from the developers and suppliers</h5>
+                                        </div>
+                                        <div class="col-lg-12 pt16 pb16" data-name="Box">
+                                            <i class="fa fa-2x fa-font-awesome rounded-circle bg-primary s_features_grid_icon"/>
+                                            <div class="te_s_features_grid_content">
+                                                <h5>Only Wearables</h5>
+                                                <p>We love wearables and we are laser focused on up and coming products</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 pt16 pb16" data-name="Box">
+                                            <span class="fa fa-2x rounded-circle bg-primary s_features_grid_icon fa-hand-scissors-o" style=""/>
+                                            <div class="te_s_features_grid_content">
+                                                <h5>Hand Picked Products</h5>
+                                                <p>All members and products undergo rigorous validation by our team of experts</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 pt16 pb16" data-name="Box">
+                                            <span class="fa fa-2x rounded-circle bg-primary s_features_grid_icon fa-cart-arrow-down" style=""/>
+                                            <div class="te_s_features_grid_content">
+                                                <h5>No Middle Man</h5>
+                                                <p>Prices straight from the suppliers and manufacturers&amp;nbsp;</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 s_col_no_bgcolor">
+                                    <div class="row">
+                                        <div class="col-lg-12 te_features_s" data-name="Box">
+                                            <h4>SELLER/DEVELOPER BENEFITS</h4>
+                                            <h5 class="te_space_text text-secondary">
+                                                <font class="text-delta" style="">Own pricing, unlimited access, onsite and offsite promotion by market specialists in US and China</font>
+                                            </h5>
+                                        </div>
+                                        <div class="col-lg-12 pt16 pb16" data-name="Box">
+                                            <span class="bg-secondary fa fa-2x rounded s_features_grid_icon fa-rocket" style=""/>
+                                            <div class="te_s_features_grid_content">
+                                                <h5>Unlimited Sales&amp;nbsp;</h5>
+                                                <p>no limit and no hidden fees, simple pricing and adoption for valid developers/suppliers</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 pt16 pb16" data-name="Box">
+                                            <span class="fa fa-2x rounded bg-secondary s_features_grid_icon fa-thumbs-o-up" style="" data-original-title="" title="" aria-describedby="tooltip649986"/>
+                                            <div class="te_s_features_grid_content">
+                                                <h5>featured products, Promotions&amp;nbsp;</h5>
+                                                <p>Selected products will be featured on and off site via our social media networks</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 pt16 pb16" data-name="Box">
+                                            <span class="fa fa-2x rounded bg-secondary s_features_grid_icon fa-connectdevelop" style=""/>
+                                            <div class="te_s_features_grid_content">
+                                                <h5>Direct to Customers</h5>
+                                                <p>Directly engage customers, own branding</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row s_nb_column_fixed">
+                                <div class="col-lg-12 s_title pt80 pb0" style="text-align: center;">
+                                    <h1 class="te_s_title_default">
+                                        <font class="text-delta" style="font-weight: normal;">Select your Membership Plan</font>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+<!--                    <section class="py-3 py-sm-5 te_space_style pb0"/>-->
+                </div>
+                <div id="wrap">
+                    <div class="container mb16 mt16">
+                        <h2 class="text-center"/>
+                        <t t-if="not bins">
+                            <div class="alert alert-success text-center o_form_header" attrs="{'invisible': [('free_membership', '=', False)]}">
+                                <div>
+                                    <strong>No seller membership plan defined yet.</strong>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+					<div class="pricing-container">
+						<div class="pricing-switcher">
+							<p class="fieldset">
+								<input type="radio" name="duration-1" value="monthly" id="monthly-1" checked="checked" />
+								<label for="monthly-1">Monthly</label>
+								<input type="radio" name="duration-1" value="yearly" id="yearly-1"/>
+								<label for="yearly-1">Yearly</label>
+								<span class="switch"></span>
+							</p>
+						</div>
+					</div>
+                    <div id="monthly" class="container">
+                        <div class="row">
+                            <t t-set="i" t-value="0"/>
+                            <t t-foreach="bins" t-as="tr_product">
+                                <t t-foreach="tr_product" t-as="td_product">
+                                    <t t-set="i" t-value="i+1"/>
+                                    <t t-if="td_product">
+                                        <t t-set="product" t-value="td_product['product']"/>
+                                        <div class="col-lg-4 oe_product_cart s_col_no_bgcolor text-center" t-att-data-publish="product.website_published and 'on' or 'off'">
+                                            <t t-set="product_image_big" t-value="td_product['x']+td_product['y'] &gt; 2"/>
+                                            <div>
+                                                <t t-call="marketplace_membership.wk_mpmembership_products_item"/>
+                                            </div>
+<!--                                            <div t-if="i%3 ==0" class="row">-->
+<!--                                                <t t-call="marketplace_membership.wk_mpmembership_products_item"/>-->
+<!--                                            </div>-->
+<!--                                            <div t-if="i%3 !=0" class="">-->
+<!--                                                <t t-call="marketplace_membership.wk_mpmembership_products_item"/>-->
+<!--                                            </div>-->
+                                        </div>
+                                    </t>
+                                </t>
+                            </t>
+                        </div>
+                    </div>
+                    <div id="yearly" class="container" style="display: none;">
+                        <div class="row">
+                            <t t-set="i" t-value="0"/>
+                            <t t-foreach="yearly_bins" t-as="tr_product">
+                                <t t-foreach="tr_product" t-as="td_product">
+                                    <t t-set="i" t-value="i+1"/>
+                                    <t t-if="td_product">
+                                        <t t-set="product" t-value="td_product['product']"/>
+                                        <div class="col-lg-4 oe_product_cart s_col_no_bgcolor text-center" t-att-data-publish="product.website_published and 'on' or 'off'">
+                                            <t t-set="product_image_big" t-value="td_product['x']+td_product['y'] &gt; 2"/>
+                                            <div>
+                                                <t t-call="marketplace_membership.wk_mpmembership_products_item"/>
+                                            </div>
+<!--                                            <div t-if="i%3 ==0" class="row">-->
+<!--                                                <t t-call="marketplace_membership.wk_mpmembership_products_item"/>-->
+<!--                                            </div>-->
+<!--                                            <div t-if="i%3 !=0" class="">-->
+<!--                                                <t t-call="marketplace_membership.wk_mpmembership_products_item"/>-->
+<!--                                            </div>-->
+                                        </div>
+                                    </t>
+                                </t>
+                            </t>
+                        </div>
+                    </div>
+                    <section class="py-3 py-sm-5 te_space_style pb0"/>
+                </div>
+            </t>
+        </template>
+
+        <template id="marketplace_membership.wk_mpmembership_products_item" name="Membership item">
+            <form action="/shop/cart/update" method="post">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <section class="card rounded-5 te_pricing_box">
+                    <h5 class="card-header te_four_column_title rounded-0 bg-white">
+                        <t t-esc="product.name"/>
+						<p><t t-esc="product.wk_tag_line"/></p>
+                    </h5>
+                    <div class="card-body text-center py-4 te_common_border_bottom">
+                        <p class="card-title te_heading_price">
+<!--                            <t t-if="website.currency_id.position == 'before'">-->
+<!--                                <sup class="te_price_currency">-->
+<!--                                    <t t-esc="website.currency_id.symbol"/>-->
+<!--                                </sup>-->
+<!--                            </t>&amp;nbsp;-->
+<!--                            <t t-esc="str(product.website_price).split('.')[0]"/>-->
+                            <span t-esc="product.website_price" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+<!--                            <t t-if="website.currency_id.position == 'after'">-->
+<!--                                <sup class="te_price_currency">-->
+<!--                                    <t t-esc="website.currency_id.symbol"/>-->
+<!--                                </sup>-->
+<!--                            </t>-->
+                        </p>
+                        <!--						<span class="te_cost_validity">/ Lorem</span>-->
+                    </div>
+                    <ul class="list-group list-group-flush px-5 py-4">
+                        <li class="list-unstyled li_text py-3">
+                            <b>Time Duration:</b>
+                            <i>
+                                <t t-esc="product.plan_duration"/>
+                                -
+                                <t t-esc="product.duration_type"/>
+                            </i>
+                            from the date of purchasing.
+                        </li>
+                        <li class="list-unstyled li_text py-3">
+                            <b>Product Reachability:</b>
+                            Allowed
+                            <i>
+                                <t t-esc="product.no_of_product"/>
+                            </i>
+                            product(s) for uploading.
+                        </li>
+                        <li class="list-unstyled li_text py-3">You can upgrade your plan any time.</li>
+                        <t t-if="product.commission_txt">
+                            <li class="list-unstyled li_text py-3">
+                                <b>Commission:</b>
+                                <t t-esc="product.commission_txt"/>
+                            </li>
+                        </t>
+                        <t t-if="product.professional_translation_txt">
+                            <li class="list-unstyled li_text py-3">
+                                <b>Proffessional Translation:</b>
+                                <t t-esc="product.professional_translation_txt"/>
+                            </li>
+                        </t>
+                        <t t-if="product.seo_txt">
+                            <li class="list-unstyled li_text py-3">
+                                <b>SEO:</b>
+                                <t t-esc="product.seo_txt"/>
+                            </li>
+                        </t>
+                        <t t-if="product.membership_t_and_c">
+                        <li class="list-unstyled li_text py-3">
+                            <b>T&amp;C:</b>
+                            <t t-esc="product.membership_t_and_c"/>
+<!--                            All terms and conditions will apply.-->
+<!--                            <a class="view_mship_t_and_c" style="float:right;cursor: pointer;">-->
+<!--                                <input type='hidden' class="membership_product_id" name="membership_product_id" t-att-value="int(product.id)"/>-->
+<!--                                <span style="font-size:12px; font-weight: 600;">*T&amp;C Apply</span>-->
+<!--                            </a>-->
+                        </li>
+                        </t>
+                    </ul>
+					<section>
+						<div class="wk_panel-footer text-center oe_website_sale">
+							<input name="product_id" t-att-value="product.product_variant_id.id" type="hidden"/>
+							<t t-if="len(product.product_variant_ids) == 1">
+								<a class="btn btn-primary te_theme_button mb32 a-submit" href="">
+									<span class="fa fa-shopping-cart"/>
+									Buy Now
+								</a>
+							</t>
+							<t t-if="len(product.product_variant_ids) &gt; 1">
+								<a class="btn btn-primary te_theme_button mb32" t-att-href="keep('/shop/product/%s' % slug(product), page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))">
+									<span class="fa fa-shopping-cart"/>
+									Buy Now
+								</a>
+							</t>
+						</div>
+					</section>
+                </section>
+            </form>
+        </template>
+    </data>
+</odoo>

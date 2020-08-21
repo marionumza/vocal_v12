@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_delivery_carrier_form" model="ir.ui.view">
+            <field name="name">delivery.carrier.form.view</field>
+            <field name="model">delivery.carrier</field>
+            <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+            <field name="arch" type="xml">
+                <field name="product_id" position="attributes">
+                    <attribute name="groups">base.group_user</attribute>
+                    <attribute name="required">True</attribute>
+                </field>
+                <field name="product_id" position="after">
+                    <field name="marketplace_seller_id" domain="[('seller', '=', True), ('state', '=', 'approved')]" options="{'no_create': True}" context="{'form_view_ref': 'odoo_marketplace.wk_seller_form_view'}" groups="odoo_marketplace.marketplace_officer_group"/>
+                </field>
+                <div name="title" position="inside">
+                    <div name="options" groups="base.group_user">
+                        <div>
+                            <field name="is_global_delivery_method"/>
+                            <label for="is_global_delivery_method"/>
+                        </div>
+                    </div>
+                </div>
+            </field>
+        </record>
+
+        <record id="view_delivery_carrier_form_for_marketplace_seller_group" model="ir.ui.view">
+            <field name="name">delivery.carrier.form.view</field>
+            <field name="model">delivery.carrier</field>
+            <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+            <field name="groups_id" eval="[(4, ref('odoo_marketplace.marketplace_seller_group'))]"/>
+            <field name="arch" type="xml">
+                <field name="product_id" position="attributes">
+                    <attribute name="required">False</attribute>
+                </field>
+                <page name="Products" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </page>
+            </field>
+        </record>
+
+        <record id="view_delivery_carrier_search" model="ir.ui.view">
+            <field name="name">delivery.carrier.search</field>
+            <field name="model">delivery.carrier</field>
+            <field name="inherit_id" ref="delivery.view_delivery_carrier_search"/>
+            <field name="arch" type="xml">
+                <filter name="provider" position="after">
+                    <filter string="Seller" name="seller" domain="[]" context="{'group_by':'marketplace_seller_id'}"/>
+                </filter>
+            </field>
+        </record>
+
+        <menuitem id="menu_marketplace_seller_delivery" action="delivery.action_delivery_carrier_form" parent="odoo_marketplace.wk_seller_dashboard_menu8"/>
+    </data>
+</odoo>

@@ -1,0 +1,70 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* to_paypal_unsupported_currencies
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-28 15:20+0000\n"
+"PO-Revision-Date: 2019-09-28 15:20+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: to_paypal_unsupported_currencies
+#: model:ir.model.fields,help:to_paypal_unsupported_currencies.field_account_payment__paypal_original_unsupported_currency_amount
+msgid "A technical field to store the original Paypal unsupported currency amount in case of payment with Paypal using a currency that is not supported by Paypal."
+msgstr "Trường kỹ thuật để lưu trữ giá trị theo tiền tệ gốc mà không được hỗ trợ bởi Paypal trong tình huống thanh toán Paypal cho giá trị theo tiền tệ không hỗ trợ bởi Paypal."
+
+#. module: to_paypal_unsupported_currencies
+#: model:ir.model.fields,help:to_paypal_unsupported_currencies.field_account_payment__paypal_original_unsupported_currency_id
+msgid "A technical field to store the original Paypal unsupported currency in case of payment with Paypal using a currency that is not supported by Paypal."
+msgstr "Trường kỹ thuật để lưu trữ tiền tệ gốc mà không được hỗ trợ bởi Paypal trong tình huống thanh toán Paypal cho giá trị theo tiền tệ không hỗ trợ bởi Paypal."
+
+#. module: to_paypal_unsupported_currencies
+#: model:ir.model.fields,field_description:to_paypal_unsupported_currencies.field_payment_acquirer__paypal_default_currency_id
+msgid "Default Paypal Currency"
+msgstr "Tiền tệ mặc định cho Paypal"
+
+#. module: to_paypal_unsupported_currencies
+#: model:ir.model,name:to_paypal_unsupported_currencies.model_payment_acquirer
+msgid "Payment Acquirer"
+msgstr "NCC dịch vụ thanh toán"
+
+#. module: to_paypal_unsupported_currencies
+#: model:ir.model,name:to_paypal_unsupported_currencies.model_payment_transaction
+msgid "Payment Transaction"
+msgstr "Giao dịch Thanh toán"
+
+#. module: to_paypal_unsupported_currencies
+#: model:ir.model,name:to_paypal_unsupported_currencies.model_account_payment
+msgid "Payments"
+msgstr "Thanh toán"
+
+#. module: to_paypal_unsupported_currencies
+#: model:ir.model.fields,field_description:to_paypal_unsupported_currencies.field_account_payment__paypal_original_unsupported_currency_id
+msgid "Paypal Original Unsupported Currency"
+msgstr "Tiền tệ gốc mà không hỗ trợ bởi Paypal"
+
+#. module: to_paypal_unsupported_currencies
+#: model:ir.model.fields,field_description:to_paypal_unsupported_currencies.field_account_payment__paypal_original_unsupported_currency_amount
+msgid "Paypal Original Unsupported Currency Amount"
+msgstr "Giá trị theo Tiền tệ gốc mà không hỗ trợ bởi Paypal"
+
+#. module: to_paypal_unsupported_currencies
+#: code:addons/to_paypal_unsupported_currencies/models/payment_acquirer.py:56
+#, python-format
+msgid "The currency %s that you have selected is not supported by Paypal."
+msgstr "Tiền tệ %s mà bạn vừa chọn thì không được hỗ trợ bởi Paypal."
+
+#. module: to_paypal_unsupported_currencies
+#: model:ir.model.fields,help:to_paypal_unsupported_currencies.field_payment_acquirer__paypal_default_currency_id
+msgid "The currency supported by Paypal that will be used for payment conversion for currencies that are not supported by Paypal.\n"
+"For example, your invoice is in VND (Vietnam Dong) which is not supported by Paypal. During online payment, Odoo will convert the amount in VND to the amount in the currency specified here before processing payment."
+msgstr "Tiền tệ được hỗ trợ bởi Paypla mà sẽ được sử dụng để chuyển đổi các giao dịch bằng tiền tệ mà Paypal không hỗ trợ.\n"
+"Ví dụ, hoá đơn của bạn bằng tiền Việt (không được hỗ trợ bởi Paypal). Trong quá trình khách hàng thực hiện thanh toán, Odoo sẽ chuyển đổi về tiền tệ được chọn này để xử lý thanh toán ở phía Paypal."
+

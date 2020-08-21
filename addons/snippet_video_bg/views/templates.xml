@@ -1,0 +1,19 @@
+<odoo>
+    <template id="snippet_video" inherit_id="website.snippets">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="snippet_video_bg.template_snippet_video"
+               t-thumbnail="/tadeas_theme/static/src/img/icon.png"/>
+        </xpath>
+    </template>
+
+    <template id="template_snippet_video" name="Hero Video">
+        <section class="">
+            <div class="container-fluid" style="">
+                <div class="overlay"></div>
+                <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" class="video_snippet">
+                    <source t-attf-src="/snippet_video_bg/static/src/video/My_Movie_1.mp4" type="video/mp4"/>
+                </video>
+            </div>
+        </section>
+    </template>
+</odoo>

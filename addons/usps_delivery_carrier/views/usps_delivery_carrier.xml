@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Copyright (c) 2017-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+	<!-- See LICENSE URL <https://store.webkul.com/license.html/> for full copyright and licensing details. -->
+    <record id="shipping_usps_form" model="ir.ui.view">
+        <field name="name">shipping.usps.form</field>
+        <field name="model">delivery.carrier</field>
+        <field name="type">form</field>
+        <field name="inherit_id"
+            ref="odoo_shipping_service_apps.view_delivery_carrier_form_inherit_wk_shipping" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='Delivery Setting']"  position="after">
+                <group
+                    string="USPS Shipping Infomation "
+                    attrs="{'invisible':[('delivery_type', '!=', 'usps')]}">
+                        <field 
+                            name="usps_servicetype"
+                            attrs="{'required':[('delivery_type', '==', 'usps')]}" />
+
+                </group>
+            </xpath>
+        </field>
+    </record> 
+
+    <record id="shipping_usps_credential__inherit_form" model="ir.ui.view">
+        <field name="name">carrer.credential.usps.form</field>
+        <field name="model">delivery.carrier</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="USPS Credentials" attrs="{'invisible':[('delivery_type', '!=', 'usps')]}" >
+                    <group>
+                        <group>
+                            <field name="usps_user_id" attrs="{'required':[('delivery_type', '==', 'usps')]}" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="delivery_carrier_usps_firstclassmailtype_form" model="ir.ui.view">
+        <field name="name">delivery.carrier.usps.firstclassmailtype.form</field>
+        <field name="model">delivery.carrier.usps.firstclassmailtype</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+     <record id="delivery_carrier_usps_firstclassmailtypee_tree" model="ir.ui.view">
+        <field name="name">delivery.carrier.usps.firstclassmailtype.tree</field>
+        <field name="model">delivery.carrier.usps.firstclassmailtype</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="contaier">
+                <field name="name"/>
+               <field name="code"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_delivery_carrier_usps_firstclassmailtype">
+            <field name="name">USPS First Class Mail</field>
+            <field name="res_model">delivery.carrier.usps.firstclassmailtype</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="delivery_carrier_usps_firstclassmailtypee_tree"/>
+    </record>
+            <record id="delivery_carrier_usps_service_form" model="ir.ui.view">
+        <field name="name">delivery.carrier.usps.service.form</field>
+        <field name="model">delivery.carrier.usps.service</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                 <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field
+                            name="usps_firstclassmailtype"
+                            attrs="{'invisible':[('code', '!=', 'FIRST CLASS')],'required':[('code', '==', 'FIRST CLASS')]}"/>
+                    </group>
+                     <group>
+                      </group>
+                    </group>
+  
+                </sheet>
+            </form>
+        </field>
+    </record>
+     <record id="delivery_carrier_usps_service_tree" model="ir.ui.view">
+        <field name="name">delivery.carrier.usps.service.tree</field>
+        <field name="model">delivery.carrier.usps.service</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="contaier">
+                <field name="name"/>
+               <field name="code"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_usps_shipping_search" model="ir.ui.view">
+        <field name="name">stock.picking.ups.shipping.search</field>
+        <field name="model">stock.picking</field>
+         <field name="inherit_id" ref="odoo_shipping_service_apps.view_picking_shipping_search"/>
+        <field name="arch" type="xml">
+            <filter  name="draft"  position='after'>
+                <filter
+                    icon="terp-check"
+                    name="USPS"
+                    string="USPS"
+                    domain="[('delivery_type','=','usps')]"
+                    help="Picking For which USPS Shipment is assign "/>
+            </filter>
+          </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_delivery_carrier_usps_service">
+            <field name="name">USPS Service List</field>
+            <field name="res_model">delivery.carrier.usps.service</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="delivery_carrier_usps_service_tree"/>
+    </record>
+    <menuitem
+        id="menu_shipping_usps"
+        name="USPS Services"
+        parent="delivery.menu_delivery"
+        string="usps" />
+
+        <menuitem
+            id="menu_shipping_usps_service"
+            parent="menu_shipping_usps"
+            string="ServiceType"
+            action="action_delivery_carrier_usps_service"/>
+        <menuitem
+            id="menu_shipping_usps_firstclassmailtype"
+            parent="menu_shipping_usps"
+            string="FirstClassMailtype"
+            action="action_delivery_carrier_usps_firstclassmailtype" />
+
+</odoo>

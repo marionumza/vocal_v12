@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <record model="website" id="website.default_website">
+            <field name="wk_allow_signup">True</field>
+            <field name="website_odoo_login" eval="True"/>
+            <field name="website_facebook_login" eval="False"/>
+            <field name="website_linkedin_login" eval="False"/>
+            <field name="website_gmail_login" eval="False"/>
+        </record>
+
+		<record id="provider_linkedin" model="auth.oauth.provider">
+            <field name="name">LinkedIn</field>
+            <field name="auth_endpoint">https://www.linkedin.com/oauth/v2/authorization</field>
+            <field name="scope">r_liteprofile</field>
+            <field name="validation_endpoint">https://api.linkedin.com/v2/me</field>
+            <field name="data_endpoint">https://api.linkedin.com/v2/me</field>
+            <field name="css_class">fa fa-fw fa-linkedin-square</field>
+            <field name="body">Log in with LinkedIn</field>
+        </record>
+	</data>
+</odoo>

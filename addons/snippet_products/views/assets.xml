@@ -1,0 +1,10 @@
+<odoo>
+    <template id="assets_frontend" inherit_id="website.assets_frontend" name="AssetFor Products Quick View">
+        <xpath expr="." position="inside">
+            <link href="/snippet_products/static/src/css/video.css"
+                  rel="stylesheet" type="text/scss"/>
+            <script type="text/javascript" src="/snippet_products/static/lib/jquery.tubular.1.0.js"/>
+            <script type="text/javascript" src="/snippet_products/static/src/js/index.js"/>
+        </xpath>
+    </template>
+</odoo>

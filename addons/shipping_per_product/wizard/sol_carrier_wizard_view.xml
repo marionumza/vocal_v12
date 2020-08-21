@@ -1,0 +1,31 @@
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : https://store.webkul.com/license.html/ -->
+<odoo>
+    <data>
+        <record id="sol_delivery_carrier_wizard_form_view" model="ir.ui.view">
+            <field name="name">sol.delivery.carrier.wizard.form</field>
+            <field name="model">sol.delivery.carrier</field>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <form>
+                    <div>
+                        <div class="text-center" style="color:#558B2F;font-size: 20px;margin-bottom: 10px;">
+                            <center>Select delivery method for each product to check delivery price.</center>
+                        </div>
+                        <field name="line_ids">
+                            <tree create="false" edit="True" delete="false" editable="bottom">
+                                <field name="product_id" readonly="1" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="delivery_carrier_id" options="{'no_create': True, 'no_open': True}" domain="[('website_published','=',True),('is_sol_carrier','=',False)]"/>
+                            </tree>
+                        </field>
+                    </div>
+                    <footer>
+                        <button name="set_delivery_line_in_so" type="object" string="Check Delivery Price" class="oe_highlight"/>
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

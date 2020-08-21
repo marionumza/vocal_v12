@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <template id="signup_fields" inherit_id="auth_signup.fields" >
+            <xpath expr="//div[@class='form-group field-login']" position="attributes">
+                <attribute name="t-if">not wxlogin</attribute>
+            </xpath>
+            <xpath expr="//div[@class='form-group field-name']" position="attributes">
+                <attribute name="t-if">not wxlogin</attribute>
+            </xpath>
+            <xpath expr="//div[@class='form-group field-password']" position="attributes">
+                <attribute name="t-if">not wxlogin</attribute>
+            </xpath>
+            <xpath expr="//div[@class='form-group field-confirm_password']" position="attributes">
+                <attribute name="t-if">not wxlogin</attribute>
+            </xpath>
+            <xpath expr="." position="inside">
+               <t t-if="wxlogin == true">
+
+
+                   <div class="form-group">
+                        <div class="pw-box-hd" id="barcode_box" style="text-align: center;">
+                            <img t-attf-src="{{ headimgurl }}" style="width: 150px;"/>
+                        </div>
+                   </div>
+
+                    <div class="form-group field-nickname">
+                        <label for="name" class="control-label">昵称</label>
+                        <input type="text" name="name" t-att-value="name" id="name" class="form-control" />
+                    </div>
+                        <input type="hidden" name="login" t-att-value="login" id="login" />
+                        <input type="hidden" name="password" t-att-value="password" id="password" />
+               </t>
+            </xpath>
+        </template>
+
+    </data>
+</openerp>

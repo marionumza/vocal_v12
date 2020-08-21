@@ -1,0 +1,162 @@
+html {
+    background: #F1F2F7;
+    overflow-y: scroll;
+}
+
+body {
+    font: 12px/150% Arial,Verdana,"\5b8b\4f53";
+    color: #666;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+em {
+    font-style: normal;
+}
+
+.p-header {
+    background-color: #fff;
+}
+
+.main, .promotion {
+    background-color: #F1F2F7;
+    padding-bottom: 50px;
+}
+
+.w {
+    width: 990px;
+    margin: 0 auto;
+}
+
+.p-footer {
+    background-color: #F1F2F7;
+}
+
+.p-footer .pf-wrap {
+    padding: 18px 0;
+    border-top: 1px solid #ddd;
+}
+
+.p-footer .pf-line {
+    line-height: 20px;
+    text-align: center;
+}
+
+.order {
+    position: relative;
+}
+
+.order .o-left {
+    float: left;
+    width: 640px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+}
+
+.order .o-title {
+    line-height: 26px;
+    height: 26px;
+    overflow: hidden;
+    font-size: 14px;
+}
+
+.order .o-tips {
+    line-height: 20px;
+    height: 20px;
+}
+
+.order .o-right {
+    float: right;
+    width: 190px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 125px;
+    overflow: hidden;
+}
+
+.order .o-price {
+    text-align: right;
+    line-height: 26px;
+    margin-bottom: 4px;
+}
+
+.order .o-price em {
+    vertical-align: bottom;
+}
+
+.order .o-price strong {
+    font-size: 18px;
+    vertical-align: bottom;
+    color: #ff5d5b;
+    margin: 0 3px;
+}
+
+.clr {
+    display: block;
+    overflow: hidden;
+    clear: both;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+}
+
+.payment {
+    border-top: 4px solid #4b5b78;
+    background-color: #fff;
+    padding: 12px 30px 0;
+}
+
+.pay-weixin {
+    zoom: 1;
+}
+
+.p-w-hd {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-family: "Microsoft Yahei";
+}
+
+.p-w-bd {
+    padding-left: 130px;
+    margin-bottom: 30px;
+}
+
+.p-w-box {
+    float: left;
+    width: 300px;
+}
+
+.pw-box-hd {
+    margin-bottom: 20px;
+}
+
+.pw-box-ft {
+    height: 44px;
+    padding: 8px 0 8px 125px;
+    background: url(/payment_wechat/static/src/img/icon-red.png) 50px 8px no-repeat #ff7674;
+}
+
+.p-w-sidebar {
+    float: left;
+    width: 379px;
+    height: 421px;
+    padding-left: 50px;
+    margin-top: -20px;
+    background: url(/payment_wechat/static/src/img/phone-bg.png) 50px 0 no-repeat;
+}
+
+.pw-box-ft p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 22px;
+    color: #fff;
+    font-weight: 700;
+}
+
+.p-w-bd:after, .pay-weixin:after {
+    display: table;
+    content: "";
+    clear: both;
+}

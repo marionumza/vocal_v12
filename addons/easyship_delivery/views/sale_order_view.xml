@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[last()]" position="after">
+                <page string="EasyShip Services" name="easyship_ts_services">
+                    <group>
+                        <field name="es_service_ids" nolabel="1" attrs="{'readonly': [('state', 'in', ('done','cancel'))]}">
+                            <tree create="false" edit="false">
+                                <field name="es_service_id"/>
+                                <field name="courier_name"/>
+                                <field name="delivery_time"/>
+                                <field name="courier_does_pickup"/>
+                                <field name="shipment_charge" widget="monetary"/>
+                                <field name="insurance_fee" widget="monetary"/>
+                                <field name="total_charge" widget="monetary"/>
+                                <field name="currency_id" invisible="1" />
+                                <button name="set_delivery_line" class="oe_link" icon="fa-arrow-right" string="Add to order" type="object"
+                                        attrs="{'invisible':['|','|',('parent.carrier_id','=',False),('parent.state','not in',('draft','sent')),('parent.delivery_rating_success','=',False)]}"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <group>
+                        <field name="es_service_id" readonly="1"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

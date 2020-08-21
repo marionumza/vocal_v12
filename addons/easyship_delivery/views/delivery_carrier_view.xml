@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_delivery_carrier_form" model="ir.ui.view">
+        <field name="name">delivery.carrier.form.view</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='destination']" position='before'>
+                <page string="Configuration" name="easyship_ts_configurations"
+                      attrs="{'invisible': [('delivery_type', '!=', 'easyship_ts')]}">
+                    <group>
+                        <group>
+                            <field name="es_category_id" attrs="{'required': [('delivery_type', '=', 'easyship_ts')]}" options='{"no_open": True, "no_create": True, "no_edit" : True}'/>
+                            <field name="es_product_packaging_id" domain="[('package_carrier_type', '=', 'easyship_ts')]"
+                                   context="{'default_package_carrier_type' : 'easyship_ts'}"
+                                   attrs="{'required': [('delivery_type', '=', 'easyship_ts')]}"/>
+                        </group>
+                        <group>
+                            <field name="es_is_insured" />
+                            <field name="es_tax_duties_plaid_by" attrs="{'required': [('delivery_type', '=', 'easyship_ts')]}"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

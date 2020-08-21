@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Copyright (c) 2017-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+    <!-- See LICENSE URL <https://store.webkul.com/license.html/> for full copyright and licensing details. -->
+
+    <record model="ir.ui.view" id="product_packaging_delivery_form">
+    <field name="name">product.packaging.form.usps</field>
+    <field name="model">product.packaging</field>
+    <field name="inherit_id" ref="delivery.product_packaging_delivery_form"/>
+    <field name="arch" type="xml">
+        <field name="length" position='after'>
+            <field name="girth"
+                            attrs="{'invisible':[('package_carrier_type', '!=', 'usps')],'required':[('package_carrier_type','in', ['usps'])]}"/>
+        </field>
+    </field> 
+    </record>
+
+    <record model="ir.ui.view" id="product_packaging_delivery_form">
+        <field name="name">product.packaging.form.usps</field>
+        <field name="model">product.packaging</field>
+        <field name="inherit_id" ref="odoo_shipping_service_apps.product_packaging_delivery_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page
+                    name='usps'
+                    string='USPS Carrier'
+                    attrs="{'invisible':[('package_carrier_type', '!=', 'usps')]}" >
+                    <group>
+                        <group>
+                            <field name="usps_machinable"
+                                attrs="{'required':[('package_carrier_type','in', ['usps'])]}"/>
+                            <field name="usps_signature"
+                                attrs="{'required':[('package_carrier_type','in', ['usps'])]}"/>
+                        </group>
+                        <group>
+                            <field name="usps_package_size"
+                                attrs="{'required':[('package_carrier_type','in', ['usps'])]}"/>
+
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

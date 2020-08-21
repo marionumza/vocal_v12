@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+carrier_users,carrier.usps.user,model_delivery_carrier_usps_service,,1,0,0,0
+carrier_admin,carrier.usps.admin,model_delivery_carrier_usps_service,stock.group_stock_manager,1,1,1,1
+firstclass_users,firstclass.usps.user,model_delivery_carrier_usps_firstclassmailtype,,1,0,0,0
+firstclass_admin,firstclass.usps.admin,model_delivery_carrier_usps_firstclassmailtype,stock.group_stock_manager,1,1,1,1

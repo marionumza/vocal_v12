@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_oe_logistics_freight_group_wxapp_sale,oe_logistics_freight.group_wxapp_sale,oejia_weshop_ent.model_oe_logistics_freight,oejia_weshop.group_wxapp_sale,1,1,1,1
+access_oe_logistics_group_wxapp_sale,oe_logistics.group_wxapp_sale,oejia_weshop_ent.model_oe_logistics,oejia_weshop.group_wxapp_sale,1,1,1,1
+access_oe_district_freight_group_wxapp_sale,oe_district_freight.group_wxapp_sale,oejia_weshop_ent.model_oe_district_freight,oejia_weshop.group_wxapp_sale,1,1,1,1

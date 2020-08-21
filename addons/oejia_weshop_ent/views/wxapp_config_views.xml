@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="wxapp_config_view_ent_inherit_1031" model="ir.ui.view">
+            <field name="name">wxapp.config.view_ent_inherit</field>
+            <field name="model">wxapp.config</field>
+            <field name="inherit_id" ref="oejia_weshop.wxapp_config_view_form_1003" />
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field [@name='wechat_pay_secret']/.." position="after">
+                     <group string="物流配置" colspan="4">
+                        <field name="kdniao_app_id"/>
+                        <field name="kdniao_app_key"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+      <!-- Copyright (c) 2017-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+    	<!-- See LICENSE URL <https://store.webkul.com/license.html/> for full copyright and licensing details. -->
+
+      <record forcecreate= "True" id="product_product_delivery_usps" model="product.product">
+          <field name="name">Delivery by USPS </field>
+          <field name="default_code">Delivery</field>
+          <field name="type">service</field>
+          <field name="taxes_id">None</field>
+          <field name="standard_price">10.0</field>
+          <field name="list_price">10.0</field>
+      </record>
+
+
+
+        <record forcecreate= "True" id="usps_delivery_carrier" model="delivery.carrier">
+            <field name="name">USPS Delivery</field>
+            <field name="normal_price">0</field>
+            <field name="delivery_type">usps</field>
+            <field name="product_id" ref="product_product_delivery_usps"></field>
+            <field name="partner_id" ref="odoo_shipping_service_apps.shipping_partner"/>
+            <field name="usps_servicetype" ref="PRIORITY"/>
+            <field name="packaging_id" ref="VARIABLE"></field>
+            <field name="enviroment">test</field>
+            <field name="extra_service_price">10</field>
+            <field name="address_validator">True</field>
+            <field name="genrate_label">True</field>
+            <field name="void_shipment">True</field>
+            <field name="uom_id" ref='uom.product_uom_oz'/>
+            <field name='delivery_uom'>OZ</field>
+            <field name="image" type="base64" file="usps_delivery_carrier/static/src/img/logo-usps.png"/>
+        </record>
+
+    </data>
+</openerp>

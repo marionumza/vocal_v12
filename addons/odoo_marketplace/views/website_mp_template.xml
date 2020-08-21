@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : https://store.webkul.com/license.html/ -->
+
+<odoo>
+    <data noupdate="0">
+        <template id="sell_link_in_menu" name="Seller Link" inherit_id="portal.frontend_layout">
+            <xpath expr="//a[@id='o_logout']" position="before">
+                <t t-if="website.env.user and not website.env.user.partner_id.seller and website.sudo().mp_show_sell_menu_header">
+                    <t t-if="website.sudo().mp_sell_page_label">
+                        <li class="nav-item">
+                            <a class="dropdown-item" role="menuitem" href="/seller" target="_blank">
+                                <span class="fa fa-truck"/>
+                                <t t-esc="website.sudo().mp_sell_page_label"/>
+                            </a>
+                        </li>
+                    </t>
+                    <t t-if="not website.sudo().mp_sell_page_label">
+                        <li class="nav-item">
+                            <a class="dropdown-item" role="menuitem" href="/seller" target="_blank"><span
+                                    class="fa fa-truck"/>Seller
+                            </a>
+                        </li>
+                    </t>
+                </t>
+            </xpath>
+        </template>
+
+        <!-- Seller Landing Page....... -->
+        <template id="sell_link_in_header" inherit_id="portal.portal_show_sign_in">
+            <xpath expr="//li[hasclass('divider')]" position="after">
+                <!--				<t t-if="website.env.user and not website.env.user.partner_id.seller and website.sudo().mp_show_sell_menu_header">-->
+                <!--					<t t-if="website.sudo().mp_sell_page_label">-->
+                <!--						<li class="nav-item">-->
+                <!--							<a class="nav-link" role="menuitem" href="/seller" target="_blank"><t t-esc="website.sudo().mp_sell_page_label"/></a>-->
+                <!--						</li>-->
+                <!--						<li class="divider hello hidden-xs"/>-->
+                <!--					</t>-->
+                <!--					<t t-if="not website.sudo().mp_sell_page_label">-->
+                <!--						<li class="nav-item">-->
+                <!--							<a class="nav-link" role="menuitem" href="/seller" target="_blank">Sell</a>-->
+                <!--						</li>-->
+                <!--						<li class="divider hello hidden-xs"/>-->
+                <!--					</t>-->
+                <!--				</t>-->
+                <t t-if="website.env.user">
+                    <li class="nav-item">
+                        <a class="nav-link" role="menuitem" href="/seller" target="_blank">Become Seller</a>
+                    </li>
+                </t>
+            </xpath>
+            <xpath expr="//li[hasclass('divider')]" position="attributes">
+                <attribute name="class">divider hidden-xs</attribute>
+            </xpath>
+        </template>
+
+        <template id="product_view_extended" inherit_id="website_sale.product" customize_show="True" active="True"
+                  name="Seller Details">
+            <xpath expr="//p[hasclass('text-muted')]" position="before">
+                <t t-set="marketplace_seller_id" t-value="product.sudo().marketplace_seller_id"/>
+                <t t-set="product_dimensions_id" t-value="product.dimensions_uom_id.sudo()"/>
+                <p class="text-muted mt-1">
+                    <t t-if="product.sale_delay">
+                        Lead time:
+                        <span t-field="product.sale_delay"/>
+                        days,
+                    </t>
+                    <t t-if="product.length and product.width and product.height">
+                        Package Size:
+                        <span t-field="product.length"/>
+                        <span t-field="product_dimensions_id.name" t-if="product_dimensions_id"/>
+                        x
+                        <span t-field="product.width"/>
+                        <span t-field="product_dimensions_id.name" t-if="product_dimensions_id"/>
+                        x
+                        <span t-field="product.height"/>
+                        <span t-field="product_dimensions_id.name" t-if="product_dimensions_id"/>,
+                    </t>
+                    <t t-if="marketplace_seller_id and marketplace_seller_id.warehouse_id.partner_id">
+                        Shipping from
+                        <span t-field="marketplace_seller_id.warehouse_id.partner_id.country_id.name"/>
+                    </t>
+                </p>
+            </xpath>
+        </template>
+
+        <template id="extra_media_template" inherit_id="website_sale.product" active="True" customize_show="True"
+                  name="Media Templates">
+            <xpath expr="//div[@id='o-carousel-product']" position="after">
+                <div id="product_embed_video" class="embed-responsive embed-responsive-16by9 mt-2"
+                     t-if="product.embed_code">
+                    <t t-raw="product.embed_code"
+                       class="d-flex align-items-center justify-content-center embed-responsive embed-responsive-16by9 mt-2"/>
+                </div>
+                <t t-set="video_attachment" t-value="product.sudo()._get_product_video_attachment()"/>
+                <div id="product_video" class="embed-responsive embed-responsive-16by9 mt-2" t-if="video_attachment">
+                    <video class="o_viewer_video" controls="controls" disablepictureinpicture="true"
+                           controlsList="nodownload">
+                        <source t-attf-src="/web/image/#{video_attachment.id}"
+                                t-att-data-type="video_attachment.mimetype"/>
+                    </video>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="wk_mp_seller_landing_page" name="Become Seller">
+            <t t-call="website.layout">
+                <div class="oe_structure"/>
+
+                <div class="leftContainer">
+                    <div class="promo">
+                        <div style="height: 500px;">
+                            <div class="carousel-inner">
+                                <t t-if="website.sudo().mp_landing_page_banner">
+                                    <div class="item oe_img_bg oe_custom_bg active"
+                                         t-attf-style="height:-webkit-fill-available;background-image: url('data:image/png;base64,#{website.sudo().mp_landing_page_banner}')"></div>
+                                </t>
+                                <t t-if="not website.sudo().mp_landing_page_banner">
+                                    <div class="item oe_img_bg oe_custom_bg active"
+                                         style="height:-webkit-fill-available;background-image: url('/odoo_marketplace/static/src/img/Hero-Banner.png')"></div>
+                                </t>
+                            </div>
+                        </div>
+                        <div class="hilight" style="padding:5%">
+                            <!-- this div is used to display black sadow on image -->
+                        </div>
+
+                        <div class="amit">
+                            <h1>Why still Offline, Start Selling Online with us!</h1>
+                            <t t-set="is_user_public" t-value="website.env.user == request.website.user_id"/>
+                            <t t-set="can_comment" t-value="sha_in or token or not is_user_public"/>
+                            <t t-if="not can_comment">
+                                <a href="/web/signup" class="btn btn-success" style="font-weight:600;">Open a New
+                                    Store
+                                </a>
+                            </t>
+                            <t t-if="can_comment">
+                                <a href="/my/marketplace/become_seller" class="btn btn-success">Open a New Store</a>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+                <div class="oe_structure"/>
+                <div class="container-fluid" style="padding-bottom:45px;padding-top:16px;background-color: #f9f9f8;">
+                    <div class="row justify-content-center">
+                        <h2 class="text-center" style="padding:5px;">More than 5,000 Sellers are part of our Marketplace
+                            Store,<br/>Join us today and get all the excited perks.
+                        </h2>
+                    </div>
+                    <div class="row mt64 justify-content-center">
+                        <div class="col-md-3 col-md-offset-2 text-center">
+                            <img src="/odoo_marketplace/static/src/img/icon-new-shop.png" alt="feature-a"/>
+                            <br/>
+                            <br/>
+                            <div class="feature-text">Open a New Shop</div>
+                            <div class="text-center">By opening a shop at our marketplace you can expose more of your
+                                products to more potential customers. Your best opportunity for growth could be selling
+                                in our online marketplace.
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <img src="/odoo_marketplace/static/src/img/icon-sell-products.png" alt="feature-b"/>
+                            <br/>
+                            <br/>
+                            <div class="feature-text">Sell Products</div>
+                            <div class="text-center">Business is all about trading. It's all about creating a product so
+                                good that people pay for it. Increase your sales figure from our high traffic channel.
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <img src="/odoo_marketplace/static/src/img/icon-commission.png" alt="feature-c"/>
+                            <br/>
+                            <br/>
+                            <div class="feature-text">Get Quick Commission</div>
+                            <div class="text-center">Be smart and start earning the commission whenever a product of
+                                yours is sold through our website. Commission Management provides full transparency and
+                                flexibility for both buy-side and sell-side.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="oe_structure"/>
+                <div class="row mt16  justify-content-center">
+                    <h2 class="text-center" style="padding:5px;">Here are some great Facilities/Perks of our
+                        <br/>
+                        Marketplace Store
+                    </h2>
+                </div>
+
+                <section class="s_text_image">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 pt16 pb16">
+                                <h2 class="text-uppercase te_s_it_heading o_default_snippet_text">Open a New Shop</h2>
+                                <div class="s_hr text-left pb32 pt8">
+                                    <hr class="border-600 s_hr_solid w-25 mr-auto s_hr_4px border-alpha"/>
+                                </div>
+                                <p class="mb16 o_default_snippet_text">You can quickly start expanding your business and
+                                    have a<br/>ull-fledged online store without having to deal with the hassle of
+                                    maintaining and<br/>investing in an e-commerce website for your products. So, start
+                                    setting up your<br/>business in our marketplace.
+                                </p>
+                                <!--                          <p class="mb16 o_default_snippet_text">Lorem ipsum dolor sit amet, eam et reque justo quidam,  audire<br/>ius no oblique phaedrum pertinacia. Ornatus referrentur nec  dicam<br/>Lorem ipsum dolor sit amet, eam et reque justo quidam, audire persius.</p>-->
+                                <div class="s_btn text-left pt16 pb16">
+                                    <a href="#" class="btn btn-primary te_theme_button o_default_snippet_text">Know
+                                        more
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 pt16 pb16">
+                                <div class="">
+                                    <img src="/odoo_marketplace/static/src/img/illustration-new-shop.png"
+                                         class="img img-fluid mx-auto" alt="Clarico-Text-Image"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="s_text_image">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <div class="" style="">
+                                    <img src="/odoo_marketplace/static/src/img/illustration-multi-support.png"
+                                         class="img img-fluid mx-auto" alt="Clarico-Image-Text"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 pt16 pb16">
+                                <h2 class="text-uppercase te_s_it_heading o_default_snippet_text">Multi Support</h2>
+                                <div class="s_hr text-left pb32 pt8">
+                                    <hr class="border-600 aos-init s_hr_solid w-25 mr-auto s_hr_4px border-alpha aos-animate"
+                                        data-aos="s_hr_4px"/>
+                                </div>
+                                <p class="mb16 o_default_snippet_text">Our company does not want to be in a single-vendor lock-in
+                                    arrangement, Multi-vendor support setups bring a numerous of benefits thus we
+                                    <br/>provide Multi-vendor/seller support.
+                                </p>
+                                <div class="s_btn text-left pt16 pb16">
+                                    <a href="#" class="btn btn-primary te_theme_button o_default_snippet_text">Know
+                                        more
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="s_text_image">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 pt16 pb16">
+                                <h2 class="text-uppercase te_s_it_heading o_default_snippet_text">Commission Management</h2>
+                                <div class="s_hr text-left pb32 pt8">
+                                    <hr class="border-600 s_hr_solid w-25 mr-auto s_hr_4px border-alpha"/>
+                                </div>
+                                <p class="mb16 o_default_snippet_text">Since trust and transparency are an important aspect of a
+                                    business hence we follow Commission Management that provides the full transparency
+                                    that shows our sellers the commission charged when their product is sold from our
+                                    website.
+                                </p>
+                                <div class="s_btn text-left pt16 pb16">
+                                    <a href="#" class="btn btn-primary te_theme_button o_default_snippet_text">Know
+                                        more
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 pt16 pb16">
+                                <div class="">
+                                    <img src="/odoo_marketplace/static/src/img/illustration-commission.png"
+                                         class="img img-fluid mx-auto" alt="Clarico-Text-Image"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="s_text_image">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <div class="" style="padding-left: 50px;">
+                                    <img src="/odoo_marketplace/static/src/img/illustration-invoice-generate.png"
+                                         class="img img-fluid mx-auto" alt="Clarico-Image-Text"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 pt16 pb16">
+                                <h2 class="text-uppercase te_s_it_heading o_default_snippet_text">Various Invoice Generation Option</h2>
+                                <div class="s_hr text-left pb32 pt8">
+                                    <hr class="border-600 aos-init s_hr_solid w-25 mr-auto s_hr_4px border-alpha aos-animate"
+                                        data-aos="s_hr_4px"/>
+                                </div>
+                                <p class="mb16 o_default_snippet_text">Having well presented and easy to understand invoices will make
+                                    you look more professional, so we will provide various invoice generation option
+                                    making sure that you are using the right invoicing tool.
+                                </p>
+                                <div class="s_btn text-left pt16 pb16">
+                                    <a href="#" class="btn btn-primary te_theme_button o_default_snippet_text">Know
+                                        more
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="s_text_image">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 pt16 pb16">
+                                <h2 class="text-uppercase te_s_it_heading o_default_snippet_text">Product Collection &amp; Management</h2>
+                                <div class="s_hr text-left pb32 pt8">
+                                    <hr class="border-600 s_hr_solid w-25 mr-auto s_hr_4px border-alpha"/>
+                                </div>
+                                <p class="mb16 o_default_snippet_text">Consumers spend more time researching product purchases online
+                                    before they buy. This makes quality product content on your eCommerce store more
+                                    important than ever. It's all a part of a better customer experience, which can lead
+                                    to an increase in your eCommerce sales.
+                                </p>
+                                <div class="s_btn text-left pt16 pb16">
+                                    <a href="#" class="btn btn-primary te_theme_button o_default_snippet_text">Know
+                                        more
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 pt16 pb16">
+                                <div class="">
+                                    <img src="/odoo_marketplace/static/src/img/illustration-product-collection.png"
+                                         class="img img-fluid mx-auto" alt="Clarico-Text-Image"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="s_text_image">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <div class="" style="padding-left: 50px;">
+                                    <img src="/odoo_marketplace/static/src/img/illustration-seller-profile.png"
+                                         class="img img-fluid mx-auto" alt="Clarico-Image-Text"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 pt16 pb16">
+                                <h2 class="text-uppercase te_s_it_heading o_default_snippet_text">View Other Seller Profile</h2>
+                                <div class="s_hr text-left pb32 pt8">
+                                    <hr class="border-600 aos-init s_hr_solid w-25 mr-auto s_hr_4px border-alpha aos-animate"
+                                        data-aos="s_hr_4px"/>
+                                </div>
+                                <p class="mb16 o_default_snippet_text">Having well presented and easy to understand invoices will make
+                                    you look more professional, so we will provide various invoice generation option
+                                    making sure that you are using the right invoicing tool.
+                                </p>
+                                <div class="s_btn text-left pt16 pb16">
+                                    <a href="#" class="btn btn-primary te_theme_button o_default_snippet_text">Know
+                                        more
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+<!--                <div class="container" style="margin-bottom:35px;">-->
+<!--                    <div class="row mt16  justify-content-center">-->
+<!--                        <h2 class="text-center" style="padding:5px;">Here are some great Facilities/Perks of our-->
+<!--                            <br/>-->
+<!--                            Marketplace Store-->
+<!--                        </h2>-->
+<!--                    </div>-->
+<!--                    <div class="row mt64 mb32 justify-content-center">-->
+<!--                        <div class="col-md-5 offset-1 text-center mt32 mb16 row">-->
+<!--                            <div class="col-md-1">-->
+<!--                                <div class="mp_hexagon">#01</div>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-11" style="padding-left:23px;">-->
+<!--                                <div class="feature-text text-left">Open a New Shop</div>-->
+<!--                                <div class="text-left">You can quickly start expanding your business and have a-->
+<!--                                    full-fledged online store without having to deal with the hassle of maintaining and-->
+<!--                                    investing in an e-commerce website for your products. So, start setting up your-->
+<!--                                    business in our marketplace.-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-5 text-center" style="height:140px;padding-left:35px;">-->
+<!--                            <div>-->
+<!--                                <img src="/odoo_marketplace/static/src/img/illustration-new-shop.png"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row mt128 mb32 hidden-xs  justify-content-center">-->
+<!--                        <div class="col-md-5 text-center" style="height:140px;padding-left:35px;">-->
+<!--                            <div>-->
+<!--                                <img src="/odoo_marketplace/static/src/img/illustration-multi-support.png"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-5 text-center mt32 row" style="padding-left: 0px;">-->
+<!--                            <div class="col-md-1">-->
+<!--                                <div class="mp_hexagon">#02</div>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-11" style="padding-left:23px;">-->
+<!--                                <div class="feature-text text-left">Multi Support</div>-->
+<!--                                <div class="text-left">Our company does not want to be in a single-vendor lock-in-->
+<!--                                    arrangement, Multi-vendor support setups bring a numerous of benefits thus we-->
+<!--                                    provide Multi-vendor/seller support.-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row mt128 mb32  justify-content-center">-->
+<!--                        <div class="col-md-5 offset-1 text-center mt32 mb16 row">-->
+<!--                            <div class="col-md-1">-->
+<!--                                <div class="mp_hexagon">#03</div>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-11" style="padding-left:23px;">-->
+<!--                                <div class="feature-text text-left">Commission Management</div>-->
+<!--                                <div class="text-left">Since trust and transparency are an important aspect of a-->
+<!--                                    business hence we follow Commission Management that provides the full transparency-->
+<!--                                    that shows our sellers the commission charged when their product is sold from our-->
+<!--                                    website.-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-5 text-center" style="height:140px;padding-left:35px;">-->
+<!--                            <div>-->
+<!--                                <img src="/odoo_marketplace/static/src/img/illustration-commission.png"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row mt128 mb32 hidden-xs  justify-content-center">-->
+<!--                        <div class="col-md-5 text-center" style="height:140px;padding-left:35px;">-->
+<!--                            <div>-->
+<!--                                <img src="/odoo_marketplace/static/src/img/illustration-invoice-generate.png"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-5 text-center mt32 row" style="padding-left: 0px;">-->
+<!--                            <div class="col-md-1">-->
+<!--                                <div class="mp_hexagon">#04</div>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-11" style="padding-left:23px;">-->
+<!--                                <div class="feature-text text-left">Various Invoice Generation Option</div>-->
+<!--                                <div class="text-left">Having well presented and easy to understand invoices will make-->
+<!--                                    you look more professional, so we will provide various invoice generation option-->
+<!--                                    making sure that you are using the right invoicing tool.-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row mt128 mb32 justify-content-center">-->
+<!--                        <div class="col-md-5 offset-1 text-center mt32 mb16 row">-->
+<!--                            <div class="col-md-1">-->
+<!--                                <div class="mp_hexagon">#05</div>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-11" style="padding-left:23px;">-->
+<!--                                <div class="feature-text text-left">Product Collection &amp; Management</div>-->
+<!--                                <div class="text-left">Consumers spend more time researching product purchases online-->
+<!--                                    before they buy. This makes quality product content on your eCommerce store more-->
+<!--                                    important than ever. It's all a part of a better customer experience, which can lead-->
+<!--                                    to an increase in your eCommerce sales.-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-5 text-center" style="height:140px;padding-left:35px;">-->
+<!--                            <div>-->
+<!--                                <img src="/odoo_marketplace/static/src/img/illustration-product-collection.png"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row mt128 mb32 hidden-xs justify-content-center">-->
+<!--                        <div class="col-md-5 text-center" style="height:140px;padding-left:35px;">-->
+<!--                            <div>-->
+<!--                                <img src="/odoo_marketplace/static/src/img/illustration-seller-profile.png"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-5 text-center mt32 row" style="padding-left: 0px;">-->
+<!--                            <div class="col-md-1">-->
+<!--                                <div class="mp_hexagon">#06</div>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-11" style="padding-left:23px;">-->
+<!--                                <div class="feature-text text-left">View Other Seller Profile</div>-->
+<!--                                <div class="text-left">The marketplace is made up of items offered by a variety of-->
+<!--                                    different merchants, both companies, and individuals. Now you can take a peek inside-->
+<!--                                    their seller profile and look at what other sellers are selling.-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <br/>-->
+<!--                    <br/>-->
+<!--                    <br/>-->
+<!--                </div>-->
+            </t>
+        </template>
+
+        <template id="mp_seller_signup" name="Seller Sign up login">
+            <t t-call="web.login_layout">
+                <form class="oe_signup_form" action="/seller/signup" id="wk_mp" role="form" method="post">
+                    <div class="text-center seller-register">Register as a Seller</div>
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <t t-call="auth_signup.fields">
+                        <t t-set="only_passwords" t-value="bool(token)"/>
+                    </t>
+                    <p class="alert alert-danger" t-if="error">
+                        <t t-esc="error"/>
+                    </p>
+                    <input type="hidden" name="signup_from_seller_page" value="false"/>
+                    <input type="hidden" name="redirect" t-att-value="redirect"/>
+                    <input type="hidden" name="token" t-att-value="token"/>
+                    <div class="clearfix oe_login_buttons">
+                        <a t-attf-href="/web/login?{{ keep_query() }}" class="btn btn-link pull-right">Back to Login</a>
+                        <button type="submit" class="btn btn-primary pull-left">Sign up</button>
+                    </div>
+
+                </form>
+            </t>
+        </template>
+
+        <template id="header_footer_custom2" inherit_id="website.footer_custom" name="Footer Sell Link">
+            <xpath expr="//div[hasclass('col-lg-4')][1]//ul" position="inside">
+                <t t-if="website.env.user and not website.env.user.partner_id.seller and website.sudo().mp_show_sell_menu_footer">
+                    <t t-if="website.sudo().mp_sell_page_label">
+                        <li>
+                            <a href="/seller" target="_blank">
+                                <t t-esc="website.sudo().mp_sell_page_label"/>
+                            </a>
+                        </li>
+                    </t>
+                    <t t-if="not website.sudo().mp_sell_page_label">
+                        <li>
+                            <a href="/seller" target="_blank">Sell</a>
+                        </li>
+                    </t>
+                </t>
+                <t t-if="website.sudo().mp_show_seller_list">
+                    <t t-if="website.sudo().mp_sellers_list_label">
+                        <li>
+                            <a href="/sellers/list" target="_blank">
+                                <t t-esc="website.sudo().mp_sellers_list_label"/>
+                            </a>
+                        </li>
+                    </t>
+                    <t t-if="not website.sudo().mp_sellers_list_label">
+                        <li>
+                            <a href="/sellers/list" target="_blank">Sellers List</a>
+                        </li>
+                    </t>
+                </t>
+
+                <t t-if="website.sudo().mp_show_seller_shop_list and website.sudo().get_group_mp_shop_allow()">
+                    <t t-if="website.sudo().mp_seller_shop_list_label">
+                        <li>
+                            <a href="/seller/shops/list" target="_blank">
+                                <t t-esc="website.sudo().mp_seller_shop_list_label"/>
+                            </a>
+                        </li>
+                    </t>
+                    <t t-if="not website.sudo().mp_seller_shop_list_label">
+                        <li>
+                            <a href="/seller/shops/list" target="_blank">Seller Shop List</a>
+                        </li>
+                    </t>
+                </t>
+            </xpath>
+        </template>
+    </data>
+</odoo>

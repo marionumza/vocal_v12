@@ -1,0 +1,76 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="elastic_record_mapping_form_view">
+	      <field name="name">Elastic Record Mapping Form</field>
+	      <field name="model">elastic.record.mapping</field>
+	      <field name="type">form</field>
+	      <field name="priority" eval="1"/>
+	      <field name="arch" type="xml">
+	      	<form create="false">
+                <sheet>
+                    <group col="4" string="Elastic Record Mapping">
+                        <field name="elastic_index_id"/>
+                        <field name="model_id"/>
+                        <field name="record_id"/>
+                        <field name="need_sync"/>
+                        <field name="record_source" widget="reference"/>
+                        <field name="index_name" invisible="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Error Traceback" attrs="{'invisible': [('description','=',False)]}">
+                            <field name='description'/>
+                        </page>
+                    </notebook>
+	      		</sheet>
+	      	</form>
+	      </field>
+	    </record>
+
+         <record model="ir.ui.view" id="elastic_record_mapping__view_tree">
+			<field name="name">elastic.record.mapping.tree</field>
+			<field name="model">elastic.record.mapping</field>
+			<field name="arch" type="xml">
+				<tree create="false">
+                    <field name="id"/>
+					<field name="elastic_index_id"/>
+                    <field name="model_id"/>
+                    <!--<field name="record_id"/>-->
+                    <!--<field name="index_name"/>-->
+                    <field name="need_sync"/>
+				</tree>
+			</field>
+	    </record>
+
+
+        <record id="view_elastic_record_mapping_form_search" model="ir.ui.view">
+            <field name="name">elastic.record.mapping.search</field>
+            <field name="model">elastic.record.mapping</field>
+            <field name="arch" type="xml">
+                <search string="Elastic Index">
+                    <field name="elastic_index_id"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_index_id" string="Elastic Index" context="{'group_by':'elastic_index_id'}" help="Elastic Index" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="elastic_record_mapping_action" model="ir.actions.act_window">
+            <field name="name">Elastic Record Mapping </field>
+            <field name="res_model">elastic.record.mapping</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="view_elastic_record_mapping_form_search"/>
+            <field name="context">{'search_default_group_index_id': 1}</field>
+        </record>
+
+
+
+
+        <!--<menuitem id="elastic_record_mapping_menu"-->
+                  <!--name="Elastic Record Mapping"-->
+                  <!--parent="elastic_search_main_menu"-->
+                  <!--action="elastic_record_mapping_action"-->
+                  <!--sequence="3"-->
+         <!--/>-->
+    </data>
+</odoo>

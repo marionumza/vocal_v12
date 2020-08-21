@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_request_stage_route_form">
+        <field name="name">view.request.stage.route.form.website</field>
+        <field name="model">request.stage.route</field>
+        <field name="inherit_id" ref="generic_request.view_request_stage_route_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" name="website_publish_button"
+                        type="object" icon="fa-globe">
+                    <field name="website_published" widget="website_button"/>
+                </button>
+            </div>
+            <field name="close" position="after">
+                <field name="website_button_style"/>
+            </field>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_request_stage_route_search">
+        <field name="name">view.request.stage.route.search.website</field>
+        <field name="model">request.stage.route</field>
+        <field name="inherit_id" ref="generic_request.view_request_stage_route_search"/>
+        <field name="arch" type="xml">
+            <group name="group_group_by" position="before">
+                <filter name="filter_website_published"
+                        string="Visible in Website"
+                        domain="[('website_published', '=', True)]"/>
+            </group>
+        </field>
+    </record>
+</odoo>
+
+

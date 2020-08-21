@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+      <record id="base.user_root" model="res.users">
+            <field name="groups_id" eval="[
+            (4, ref('base.group_multi_currency')),
+            (4, ref('stock.group_tracking_lot')),
+            (4, ref('stock.group_stock_manager')),
+            (4, ref('product.group_stock_packaging')),
+            ]"/>
+        </record>
+        <record id="base.group_user" model="res.groups">
+            <field name="name">Packaging</field>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="implied_ids" eval="[(4, ref('stock.group_tracking_lot'))]"></field>
+        </record>
+        <record id="product.product_product_24_product_template" model="product.template">
+            <field name="weight">1</field>
+            <field name="volume">1</field>
+            
+        </record>
+         <record id="product.product_product_24" model="product.product">
+            <field name="weight">1</field>
+            <field name="volume">1</field>
+        </record>
+
+
+        <record id="base.main_company" model="res.company">
+            <field name="name">Your Company</field>
+            <field name="is_company">1</field>
+            <field name="supplier">1</field>
+            <field eval="0" name="customer"/>
+            <field name="phone">5417543010</field>
+            <field name="email">xyz@webkul.com</field>
+            <field name="street">69 Watson Street</field>
+            <field name="city">Los Angeles</field>
+            <field name="state">California</field>
+            <field name="zip">90002</field>
+            <field model="res.country" name="country_id" search="[('code','ilike','us')]"/>
+        </record>
+       <!-- Domestic Customer -->
+        <record id="dhl_domestic_express_demo_customer" model="res.partner">
+            <field name="name">DHL Domenstic Express Demo</field>
+            <field name="is_company">0</field>
+            <field name="supplier">0</field>
+            <field eval="1" name="customer"/>
+            <field name="type">delivery</field>
+            <field name="phone">5417543010</field>
+            <field name="email">xyz@webkul.com</field>
+            <field name="street">69 Watson Street</field>
+            <field name="city">Los Angeles</field>
+            <field name="zip">90002</field>
+            <field name="state_id" model="res.country.state" search="[('name','=','California')]" ></field>
+            <field model="res.country" name="country_id" search="[('code','ilike','us')]"/>
+        </record>
+        <!-- International Customer -->
+        <record id="dhl_worldwide_express_demo_customer" model="res.partner">
+            <field name="name">DHL WorldWide EXPRESS Demo</field>
+            <field name="is_company">0</field>
+            <field name="supplier">0</field>
+            <field eval="1" name="customer"/>
+            <field name="type">delivery</field>
+            <field name="phone">403-699-5286</field>
+            <field name="email">xyz@webkul.com</field>
+            <field name="street">4 Avenue S / 5 Avenue S</field>
+            <field name="city">Calgary</field>
+            <field name="zip">T1X 0L3</field>
+            <field name="state_id" model="res.country.state" search="[('name','=','Alberta')]" ></field>
+            <field model="res.country" name="country_id" search="[('code','ilike','ca')]"/>
+        </record>
+        <record forcecreate="True" id="base.user_admin_res_partner" model="res.partner">
+            <field name="child_ids" eval="[(6,0,[ref('dhl_delivery_carrier.dhl_domestic_express_demo_customer'),ref('dhl_delivery_carrier.dhl_worldwide_express_demo_customer')])]"/>
+        </record>
+    </data>
+</odoo>
+<!-- note Showing error while putting this file in demo data so thats why putedin manifest data attribute -->

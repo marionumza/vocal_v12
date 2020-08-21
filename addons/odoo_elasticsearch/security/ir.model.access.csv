@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_odoo_elasticsearch_config,odoo_elasticsearch.elastic.search.config.public,model_elastic_search_config,,1,1,1,1
+access_odoo_elastic_index,odoo_elasticsearch.elastic.index.public,model_elastic_index,,1,1,1,1
+access_odoo_elastic_domain_field,odoo_elasticsearch.elastic_domain_field.public,model_elastic_domain_field,,1,1,1,1
+access_odoo_elastic_field_mapping,odoo_elasticsearch.elastic.field.mapping.public,model_elastic_field_mapping,,1,1,1,1
+access_odoo_elastic_record_mapping,odoo_elasticsearch.elastic.record.mapping.public,model_elastic_record_mapping,,1,1,1,1
+access_odoo_trend_search_mapping,odoo_elasticsearch.trend.search.mapping.public,model_trend_search_mapping,,1,1,1,1
+access_odoo_elastic_connection,odoo_elasticsearch.elastic.connection.public,model_elastic_connection,,1,1,1,1
